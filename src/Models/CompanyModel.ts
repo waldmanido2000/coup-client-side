@@ -1,4 +1,4 @@
-
+import { CouponModel } from "./CouponModel";
     export interface CompanyModel {
         id: number;
         name: string;
