@@ -105,12 +105,13 @@ body {
 }
 
 .box {
-  display: inline-flex;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  background-color: gray;
-  border: 3px solid royalblue;
+  background-color: var(--lighter-color);
+  border: 3px solid var(--darker-color);
+  margin: 0.1em;
 }
 
 /* entities display classes */
