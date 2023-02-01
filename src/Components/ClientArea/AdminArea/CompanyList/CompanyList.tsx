@@ -30,11 +30,14 @@ function CompanyList(): JSX.Element {
 
                         store.dispatch(gotAllCompaniesAction(res.data));
 
-                        // notify.success('Woho I got my element from server side!!!')
+                        notify.success('Woho I got my element from server side!!!')
                     })
                     .catch(err => notify.error(err));
 
         }
+        return store.subscribe(() => {
+            setCompanies(store.getState().companiesReducer.companies); // Will let us notify
+        });
     }, []);
 
 
@@ -45,13 +48,6 @@ function CompanyList(): JSX.Element {
                     ? <>{companies.map((company, idx) => <CompanyCard key={"c" + idx} />)}</>
                     : <Page404 />
             }
-
-
-            {/* {
-                tasks.length > 0
-                    ? <>{tasks.map((task, idx) => <p key={"t" + idx}>{task.id},{task.title},{task.description}</p>)}</>
-                    : <EmptyView msg="No Tasks for you!" />
-            } */}
         </div>
     );
 }
