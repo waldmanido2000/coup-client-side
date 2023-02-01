@@ -36,16 +36,16 @@ function CompanyList(): JSX.Element {
 
         }
         return store.subscribe(() => {
-            setCompanies(store.getState().companiesReducer.companies); // Will let us notify
+            setCompanies(store.getState().companiesReducer.companies);
         });
     }, []);
 
 
     return (
-        <div className="CompanyList">
+        <div className="CompanyList col">
 			{
                 companies?.length > 0
-                    ? <>{companies.map((company, idx) => <CompanyCard key={"c" + idx} />)}</>
+                    ? <>{companies.map((c, idx) => <CompanyCard key={"c" + idx} company={c} />)}</>
                     : <Page404 />
             }
         </div>

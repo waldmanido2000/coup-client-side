@@ -24,7 +24,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 /* layout areas */
+
 .Header {
   background-color: var(--darker-color);
   padding: var(--layout-padding);
@@ -80,4 +82,89 @@ body {
 
 .Footer svg {
   margin: 0.2em;
+}
+
+/* global display classes */
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
+
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: gray;
+  border: 3px solid royalblue;
+}
+
+/* entities display classes */
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(215, 200, 200);
+  border: 3px dashed darkblue;
+  margin: 10px;
+  width: 150px;
+  height: 250px;
+}
+
+/* form display classes */
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+form input[type="text"], input[type="datetime-local"] {
+  width: 200px;
+  height: 25px;
+}
+
+form button {
+  width: 100%;
+  height: 25px;
+  margin: 5px;
+  border: none;
+  background-color: #2270be;
+  color: white;
+  font-size: large;
+}
+
+form button:hover {
+
+  background-color: #6186ab;
+
+}
+
+form button:disabled {
+
+  cursor: not-allowed;
+  background-color: #6186ab;
+
+}
+
+form span {
+  color: red;
+  font-weight: 700;
 }
