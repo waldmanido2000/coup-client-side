@@ -36,7 +36,7 @@ function CompanyList(): JSX.Element {
     }, []);
 
     return (
-        <div className="CompanyList col">
+        <div className="CompanyList row">
 			{
                 companies?.length > 0
                     ? <>{companies.map((c, idx) => <CompanyCard key={"c" + idx} company={c} />)}</>

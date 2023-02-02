@@ -3,6 +3,7 @@ import App from "../../../App";
 import Login from "../../AuthArea/Login/Login";
 import Logout from "../../AuthArea/Logout/Logout";
 import CompanyList from "../../ClientArea/AdminArea/CompanyList/CompanyList";
+import DeleteCompany from "../../ClientArea/AdminArea/DeleteCompany/DeleteCompany";
 import EditCompany from "../../ClientArea/AdminArea/EditCompany/EditCompany";
 import SingleCompany from "../../ClientArea/AdminArea/SingleCompany/SingleCompany";
 import About from "../../PagesArea/MainArea/About/About";
@@ -22,6 +23,7 @@ function Routing(): JSX.Element {
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/companies" element={<CompanyList />} />
                 <Route path="/company/edit/:id" element={<EditCompany />} />
+                <Route path="/company/delete/:id" element={<DeleteCompany />} />
                 <Route path="*" element={<Page404 />} />
             </Routes>
         </div>

@@ -14,7 +14,7 @@ function EditCompany(): JSX.Element {
     const params = useParams();
     const id = +(params.id || 0)
 
-    const toUpdate = store.getState().companiesReducer.companies.filter(c => c.id === id)[0]
+    const toUpdate = store.getState().companiesReducer.companies.filter(c => c.id === id)[0];
     const [obj, setObj] = useState<CompanyModel>(toUpdate);
 
     const navigate = useNavigate();
