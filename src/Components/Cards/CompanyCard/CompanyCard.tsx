@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaTrash, FaEdit, FaCaretDown, FaCaretRight } from "react-icons/fa";
+import { FaTrash, FaEdit, FaCaretDown, FaCaretRight, FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CompanyModel } from "../../../Models/CompanyModel";
 import CouponCard from "../CouponCard/CouponCard";
@@ -23,7 +23,7 @@ function CompanyCard(props: CompanyProps): JSX.Element {
     }
 
     return (
-        <div className={`CompanyCard${float ? " float" : ""}`}>
+        <div className={`CompanyCard${float ? " float current" : ""}`}>
             <h3>
                 {props.company.name}
             </h3>
@@ -36,8 +36,10 @@ function CompanyCard(props: CompanyProps): JSX.Element {
                 setIsOpen(!isOpen);
                 setFloat(currentFloat => !currentFloat);
             }}>
-                {isOpen ? <FaCaretDown /> : <FaCaretRight />}
-                {isOpen ? "hide coupons" : "show coupons"}
+                <div className="showHide">
+                    <>{isOpen ? "hide coupons" : "show coupons"}</>
+                    <>{isOpen ? <FaCaretSquareUp /> : <FaCaretSquareDown />}</>
+                </div>
                 {isOpen && (
                     <p className="companyCoupons">
                         {props.company.coupons.map((c, idx) => (

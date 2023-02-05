@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FaRegPlusSquare, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 import { gotAllCompaniesAction } from "../../../../Redux/CompanyAppState";
@@ -36,13 +37,16 @@ function CompanyList(): JSX.Element {
     }, []);
 
     return (
-        <div className="CompanyList row">
-			{
-                companies?.length > 0
+        <>
+            <div className="row">
+                <button className="cardButton" onClick={() => navigate('/company/add/')}><FaRegPlusSquare />&nbsp;add a new Company</button>
+            </div>
+            <div className="CompanyList row">
+                {companies?.length > 0
                     ? <>{companies.map((c, idx) => <CompanyCard key={"c" + idx} company={c} />)}</>
-                    : <Page404 />
-            }
-        </div>
+                    : <Page404 />}
+            </div>
+        </>
     );
 }
 

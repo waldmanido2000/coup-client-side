@@ -1,8 +1,9 @@
 import { companiesReducer } from "./CompanyAppState";
 import { combineReducers,createStore } from "redux";
+import { customersReducer } from "./CustomerAppState";
 
-//Multiple catsReducer
-const reducers = combineReducers({companiesReducer: companiesReducer});
+//Multiple Reducers
+const reducers = combineReducers({companiesReducer: companiesReducer, customersReducer: customersReducer});
 const store = createStore(reducers);
 
 
