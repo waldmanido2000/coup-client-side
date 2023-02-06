@@ -269,5 +269,33 @@ form span {
   justify-items: center;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5em;
+  padding: 0em 1.5em 0.5em 1.5em;
+}
+.CouponCard img, .PurchaseCard img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+.car {
+  background-image: url("\\Assets\\cars.jpg");
+}
+.restaurant {
+  background-image: url("\\Assets\\restaurant.jpg");
+}
+.food {
+  background-image: url("\\Assets\\food.jpg");
+}
+.electricity {
+  background-image: url("\\Assets\\electricity.jpg");
+}
+.vacation {
+  background-image: url("\\Assets\\vacation.jpg");
+}
+.clothes {
+  background-image: url("\\Assets\\clothes.jpg");
+}
+.CouponCard, .PurchaseCard {
+  background-size: cover;
+  border: 1px solid var(--darker-color);
+  margin-bottom: 0.8em;;
 }
