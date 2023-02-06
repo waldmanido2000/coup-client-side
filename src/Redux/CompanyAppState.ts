@@ -43,7 +43,7 @@ export class CompanyAppState {
         };
     }
     
-    export function updatedCompanyACtion(company: CompanyModel): CompanyAction {
+    export function updatedCompanyAction(company: CompanyModel): CompanyAction {
         return {
             type: ActionType.UPDATED_COMPANY,
             payload: company

@@ -8,7 +8,7 @@ import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import "./EditCompany.css";
-import { updatedCompanyACtion } from "../../../../Redux/CompanyAppState";
+import { updatedCompanyAction } from "../../../../Redux/CompanyAppState";
 
 function EditCompany(): JSX.Element {
     const params = useParams();
@@ -32,7 +32,7 @@ function EditCompany(): JSX.Element {
     const putCompany = async (company: CompanyPayloadModel) => {
         await webApi.editCompany(id, company)
             .then(res => {
-                store.dispatch(updatedCompanyACtion(res.data));
+                store.dispatch(updatedCompanyAction(res.data));
                 notify.success('Woho company updated successfully');
                 navigate('/companies');
             })

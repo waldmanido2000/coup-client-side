@@ -7,7 +7,7 @@ import webApi from "../../../../Services/WebApi";
 import SingleCompany from "../SingleCompany/SingleCompany";
 
 
-function DeleteTodo(): JSX.Element {
+function DeleteCompany(): JSX.Element {
     const params = useParams();
     const id = +(params.id || 0);
     const companyName = store.getState().companiesReducer.companies.filter(c => c.id === id)[0].name.toUpperCase();
@@ -44,4 +44,4 @@ function DeleteTodo(): JSX.Element {
     );
 }
 
-export default DeleteTodo;
+export default DeleteCompany;
