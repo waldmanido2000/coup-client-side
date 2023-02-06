@@ -2,6 +2,8 @@ import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../..//Assets/not-found.jpg";
 import "./PurchaseCard.css";
+import { FaShekelSign } from "react-icons/fa";
+import store from "../../../Redux/Store";
 interface PurchaseProps {
 	purchase: CouponModel;
 }
@@ -36,18 +38,16 @@ function PurchaseCard(props:PurchaseProps): JSX.Element {
 						<h4>{props.purchase.title}</h4>
 			<div className="row">
 				<div>
-					<p>description: {props.purchase.description}</p>
-					<p>category: {props.purchase.category}</p>
-					<p>available since: {props.purchase.startDate}</p>
-					<p>ends in: {props.purchase.endDate}</p>
-					<p>cost: {props.purchase.price}</p>
+					<p>Description: {props.purchase.description}</p>
+					<p>Ends in: {props.purchase.endDate}</p>
+					<p><span>Cost: {props.purchase.price}<FaShekelSign /></span></p>
 				</div>
 				<div>
 					{
 						imageError ?
-							<img src={notFoundImage} alt={props.purchase.image} />
+							<img src={notFoundImage} alt={props.purchase.title} />
 							:
-							<img src={imageUrl} alt={props.purchase.image} onError={handleImageError} />
+							<img src={imageUrl} alt={props.purchase.title} onError={handleImageError} />
 					}
 				</div>
 			</div>

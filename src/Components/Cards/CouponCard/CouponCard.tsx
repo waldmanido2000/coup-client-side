@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../..//Assets/not-found.jpg";
 import "./CouponCard.css";
+import { FaShekelSign } from "react-icons/fa";
 
 interface CouponProps {
 	coupon: CouponModel;
@@ -39,19 +40,19 @@ function CouponCard(props: CouponProps): JSX.Element {
 			<h4>{props.coupon.title}</h4>
 			<div className="row">
 				<div>
-					<p>description: {props.coupon.description}</p>
-					<p>category: {props.coupon.category}</p>
-					<p>available since: {props.coupon.startDate}</p>
-					<p>ends in: {props.coupon.endDate}</p>
-					<p>cost: {props.coupon.price}</p>
-					<p>left to purchase: {props.coupon.amount}</p>
+					<p>Description: {props.coupon.description}</p>
+					<p>Category: {props.coupon.category}</p>
+					<p>Available since: {props.coupon.startDate}</p>
+					<p>Ends in: {props.coupon.endDate}</p>
+					<p><span>Eost: {props.coupon.price}<FaShekelSign /></span></p>
+					<p>Left to purchase: {props.coupon.amount}</p>
 				</div>
 				<div>
 					{
 						imageError ?
-							<img src={notFoundImage} alt={props.coupon.image} />
+							<img src={notFoundImage} alt={props.coupon.title} />
 							:
-							<img src={imageUrl} alt={props.coupon.image} onError={handleImageError} />
+							<img src={imageUrl} alt={props.coupon.title} onError={handleImageError} />
 					}
 				</div>
 			</div>

@@ -8,7 +8,9 @@ import "./DeleteCustomer.css";
 function DeleteCustomer(): JSX.Element {
     const params = useParams();
     const id = +(params.id || 0);
-    const customerName = store.getState().customersReducer.customers.filter(c => c.id === id)[0].firstName.toUpperCase();
+    const firstName = store.getState().customersReducer.customers.filter(c => c.id === id)[0].firstName.toUpperCase();
+    const lastName = store.getState().customersReducer.customers.filter(c => c.id === id)[0].lastName.toUpperCase();
+    const customerName = firstName+" "+lastName;
     const navigate = useNavigate();
 
     const abort = () => {
