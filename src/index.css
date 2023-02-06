@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk&display=swap');
+
 html,
 body,
 #root {
   width: 100%;
   height: 100%;
   margin: 0;
+  font-family: 'Righteous', cursive, 'Space Grotesk', sans-serif;
+
 }
+
 
 /* root vars */
 
@@ -18,9 +23,6 @@ body,
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -253,15 +255,16 @@ form span {
   display: flex;
   justify-items: center;
   align-items: center;
+  font-family: 'Righteous', cursive, 'Space Grotesk', sans-serif;
 }
-.CouponCard p {
+.CouponCard p, .PurchaseCard p {
   display: flex;
   flex-direction: column;
   text-align: justify;
   align-items: flex-start;
   justify-items: flex-start;
 }
-.CouponCard .row {
+.CouponCard .row, .PurchaseCard .row {
   display: flex;
   justify-items: center;
   align-items: center;

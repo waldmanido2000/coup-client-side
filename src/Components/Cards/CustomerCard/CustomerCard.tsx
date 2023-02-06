@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaTrash, FaEdit, FaCaretSquareUp, FaCaretSquareDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CustomerModel } from "../../../Models/CustomerModel";
-import CouponCard from "../CouponCard/CouponCard";
+import PurchaseCard from "../PurchaseCard/PurchaseCard";
 import "./CustomerCard.css";
 
 interface CustomerProps {
@@ -42,8 +42,8 @@ function CustomerCard(props: CustomerProps): JSX.Element {
                 </div>
                 {isOpen && (
                     <p className="companyCoupons">
-                        {props.customer.coupons.map((c, idx) => (
-                            <CouponCard key={"c" + idx} coupon={c} />
+                        {props.customer.coupons.map((p, idx) => (
+                            <PurchaseCard key={"p" + idx} purchase={p} />
                         ))}
                     </p>
                 )}
