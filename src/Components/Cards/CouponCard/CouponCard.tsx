@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
-import notFoundImage from "../../..//Assets/not-found.jpg";
+import notFoundImage from "../../../Assets/not-found.jpg";
 import "./CouponCard.css";
 import { FaShekelSign } from "react-icons/fa";
 
