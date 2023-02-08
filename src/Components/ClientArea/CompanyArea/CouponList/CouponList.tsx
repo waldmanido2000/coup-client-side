@@ -39,7 +39,7 @@ function CouponList(): JSX.Element {
     return (
         <>
             <div className="row">
-                <button className="cardButton" onClick={() => navigate('/coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
+                <button className="cardButton" onClick={() => navigate('/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
             </div>
             <div className="CouponList row">
                 {coupons?.length > 0

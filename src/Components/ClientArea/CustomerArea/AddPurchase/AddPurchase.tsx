@@ -1,8 +1,8 @@
-import "./CouponPurchase.css";
+import "./AddPurchase.css";
 
 function CouponPurchase(): JSX.Element {
     return (
-        <div className="CouponPurchase">
+        <div className="AddPurchase">
 			
         </div>
     );

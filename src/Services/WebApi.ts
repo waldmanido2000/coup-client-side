@@ -3,7 +3,7 @@ import global from './ConstantService';
 import store from '../Redux/Store';
 import { CompanyModel, CompanyPayloadModel } from '../Models/CompanyModel';
 import { CustomerModel, CustomerPayloadModel } from '../Models/CustomerModel';
-import { CouponModel } from '../Models/CouponModel';
+import { CouponModel, CouponPayloadModel } from '../Models/CouponModel';
 class WebApi {
 
     private adminCompaniesApi = global.urls.companies;
@@ -104,13 +104,13 @@ class WebApi {
             return axios.delete<any>(this.companyApi + "/" + id);
         }
     
-        public addCompanyCoupon(customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
-            return axios.post<CouponModel>(this.companyApi, customer);
+        public addCompanyCoupon(coupon: CouponPayloadModel): Promise<AxiosResponse<CouponModel>> {
+            return axios.post<CouponModel>(this.companyApi, coupon);
     
         }
     
-        public editCompanyCoupon(id: number, customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
-            return axios.put<CouponModel>(this.companyApi + "/" + id, customer);
+        public editCompanyCoupon(id: number, coupon: CouponPayloadModel): Promise<AxiosResponse<CouponModel>> {
+            return axios.put<CouponModel>(this.companyApi + "/" + id, coupon);
         }
 }
 

@@ -9,6 +9,7 @@
         price: number;
         image: string;
     }
+    
     export interface CouponPayloadModel {
         category: string;
         title: string;
