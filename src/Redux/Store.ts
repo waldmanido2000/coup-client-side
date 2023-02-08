@@ -2,6 +2,7 @@ import { companiesReducer } from "./CompanyAppState";
 import { combineReducers, createStore } from "redux";
 import { customersReducer } from "./CustomerAppState";
 import { couponsReducer } from "./CouponAppState";
+import { couponsReducer } from "./CouponAppState";
 
 //Multiple Reducers
 const reducers = combineReducers({
