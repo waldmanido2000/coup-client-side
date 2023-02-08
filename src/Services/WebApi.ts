@@ -3,6 +3,7 @@ import global from './ConstantService';
 import store from '../Redux/Store';
 import { CompanyModel, CompanyPayloadModel } from '../Models/CompanyModel';
 import { CustomerModel, CustomerPayloadModel } from '../Models/CustomerModel';
+import { CouponModel } from '../Models/CouponModel';
 class WebApi {
 
     private adminCompaniesApi = global.urls.companies;
@@ -68,8 +69,49 @@ class WebApi {
     public editCustomer(id: number, customer: CustomerPayloadModel): Promise<AxiosResponse<CustomerModel>> {
         return axios.put<CustomerModel>(this.adminCustomersApi + "/" + id, customer);
     }
+    // ------------------------ Customer actions ------------------------
+    public getAllCustomerCoupons(): Promise<AxiosResponse<CouponModel[]>> {
+        return axios.get<CouponModel[]>(this.customerApi);
+    }
 
+    public getSingleCustomerCouponById(id: number): Promise<AxiosResponse<CouponModel>> {
+        return axios.get<CouponModel>(this.customerApi + "/" + id);
+    }
 
+    public deleteCustomerCoupon(id: number): Promise<AxiosResponse<any>> {
+        return axios.delete<any>(this.customerApi + "/" + id);
+    }
+
+    public addCustomerCoupon(customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
+        return axios.post<CouponModel>(this.customerApi, customer);
+
+    }
+
+    public editCustomerCoupon(id: number, customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
+        return axios.put<CouponModel>(this.customerApi + "/" + id, customer);
+    }
+
+        // ------------------------ Company actions ------------------------
+        public getAllCompanyCoupons(id: number): Promise<AxiosResponse<CouponModel[]>> {
+            return axios.get<CouponModel[]>(this.companyApi + "/" + id + "/coupons");
+        }
+    
+        public getSingleCompanyCouponById(id: number): Promise<AxiosResponse<CouponModel>> {
+            return axios.get<CouponModel>(this.companyApi + "/" + id);
+        }
+    
+        public deleteCompanyCoupon(id: number): Promise<AxiosResponse<any>> {
+            return axios.delete<any>(this.companyApi + "/" + id);
+        }
+    
+        public addCompanyCoupon(customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
+            return axios.post<CouponModel>(this.companyApi, customer);
+    
+        }
+    
+        public editCompanyCoupon(id: number, customer: CustomerPayloadModel): Promise<AxiosResponse<CouponModel>> {
+            return axios.put<CouponModel>(this.companyApi + "/" + id, customer);
+        }
 }
 
 const webApi = new WebApi();
