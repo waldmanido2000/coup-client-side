@@ -104,8 +104,8 @@ class WebApi {
             return axios.delete<any>(this.companyApi + "/" + id);
         }
     
-        public addCompanyCoupon(coupon: CouponPayloadModel): Promise<AxiosResponse<CouponModel>> {
-            return axios.post<CouponModel>(this.companyApi, coupon);
+        public addCompanyCoupon(coupon: CouponPayloadModel, companyId: number): Promise<AxiosResponse<CouponModel>> {
+            return axios.post<CouponModel>(this.companyApi + "/" + companyId + "/coupons", coupon);
     
         }
     

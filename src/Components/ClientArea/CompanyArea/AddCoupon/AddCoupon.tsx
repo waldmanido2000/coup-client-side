@@ -6,14 +6,29 @@ import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 
 const companyId: number = 1;
+const options = [
+    { value: "FOOD", label: "FOOD" },
+    { value: "VACATION", label: "VACATION" },
+    { value: "CARS", label: "CARS" },
+    { value: "CLOTHES", label: "CLOTHES" },
+    { value: "RESTAURANT", label: "RESTAURANT" },
+    { value: "ELECTRICITY", label: "ELECTRICITY" }
+];
+
 const AddCoupon = () => {
     // Define the schema for validating the form input using yup
     const schema = yup.object().shape({
         category: yup.string().required("Category is required"),
         title: yup.string().required("Title is required"),
         description: yup.string().required("Description is required"),
-        startDate: yup.string().required("Start date is required"),
-        endDate: yup.string().required("End date is required"),
+        startDate: yup
+            .date()
+            .required('startDate is required')
+            .min(new Date(), "startDate must be later than today's date"),
+        endDate: yup
+            .date()
+            .required('endDate is required')
+            .min(yup.ref('startDate'), 'endDate must be later than startDate'),
         amount: yup.number().required("Amount is required"),
         price: yup.number().required("Price is required"),
         image: yup.string().required("Image is required"),
@@ -30,7 +45,7 @@ const AddCoupon = () => {
     const postCoupon = async (coupon: CouponPayloadModel) => {
         // Call the addCoupon API and handle the response
         console.log(coupon);
-        await webApi.addCompanyCoupon(coupon)
+        await webApi.addCompanyCoupon(coupon, companyId)
             .then(() => {
                 // Show a success notification
                 notify.success('Coupon added successfully');
@@ -45,9 +60,14 @@ const AddCoupon = () => {
         <div className="AddCoupon">
             <h1>Add Coupon</h1>
             <form onSubmit={handleSubmit(postCoupon)}>
-                <input type="hidden" id="companyId" name="companyId" value={companyId}/>
                 <label htmlFor="category">Category</label>
-                <input {...register("category")} id="category" name="category" type="text" placeholder="Category..." />
+                <select {...register("category")} id="category" name="category">
+                    {options.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
 
                 <label htmlFor="title">Title</label>
                 <input {...register("title")} id="title" name="title" type="text" placeholder="Title..." />

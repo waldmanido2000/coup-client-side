@@ -44,7 +44,7 @@ function CouponCard(props: CouponProps): JSX.Element {
 					<p>Category: {props.coupon.category}</p>
 					<p>Available since: {props.coupon.startDate}</p>
 					<p>Ends in: {props.coupon.endDate}</p>
-					<p><span>Eost: {props.coupon.price}<FaShekelSign /></span></p>
+					<p><span>Cost: {props.coupon.price}<FaShekelSign /></span></p>
 					<p>Left to purchase: {props.coupon.amount}</p>
 				</div>
 				<div>
