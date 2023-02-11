@@ -150,7 +150,7 @@ form span {
 
 /* company cards */
 
-.CompanyCard, .DeleteCompany,.CustomerCard, .DeleteCustomer {
+.CompanyCard, .DeleteCompany,.CustomerCard, .DeleteCustomer, .DeleteCoupon {
   display: flex;
   box-shadow: 8px 6px 8px -2px var(--darker-color);
   flex-direction: column;

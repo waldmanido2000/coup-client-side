@@ -13,6 +13,8 @@ import EditCustomer from "../../ClientArea/AdminArea/EditCustomer/EditCustomer";
 import SingleCompany from "../../ClientArea/AdminArea/SingleCompany/SingleCompany";
 import AddCoupon from "../../ClientArea/CompanyArea/AddCoupon/AddCoupon";
 import CouponList from "../../ClientArea/CompanyArea/CouponList/CouponList";
+import DeleteCoupon from "../../ClientArea/CompanyArea/DeleteCoupon/DeleteCoupon";
+import EditCoupon from "../../ClientArea/CompanyArea/EditCoupon/EditCoupon";
 import About from "../../PagesArea/MainArea/About/About";
 import Home from "../../PagesArea/MainArea/Home/Home";
 import Page404 from "../../PagesArea/MainArea/Page404/Page404";
@@ -38,6 +40,8 @@ function Routing(): JSX.Element {
                 <Route path="/customer/delete/:id" element={<DeleteCustomer />} />
                 <Route path="/company-coupons" element={<CouponList />} />
                 <Route path="/company-coupon/add" element={<AddCoupon />} />
+                <Route path="/company-coupon/edit/:id" element={<EditCoupon />} />
+                <Route path="company/:companyId/company-coupon/delete/:id" element={<DeleteCoupon />} />
 
 
                 <Route path="*" element={<Page404 />} />

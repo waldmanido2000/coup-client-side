@@ -28,28 +28,28 @@ export function gotAllPurchasesAction(purchases: CouponModel[]): PurchaseAction 
     };
 }
 
-export function gotSingleCouponAction(coupon: CouponModel): PurchaseAction {
+export function gotSinglePurchaseAction(coupon: CouponModel): PurchaseAction {
     return {
         type: ActionType.GOT_SINGLE_PURCHASE,
         payload: coupon
     };
 }
 
-export function addedCouponAction(coupon: CouponModel): PurchaseAction {
+export function addedPurchaseAction(coupon: CouponModel): PurchaseAction {
     return {
         type: ActionType.ADDED_PURCHASE,
         payload: coupon
     };
 }
 
-export function updatedCouponAction(coupon: CouponModel): PurchaseAction {
+export function updatedPurchaseAction(coupon: CouponModel): PurchaseAction {
     return {
         type: ActionType.UPDATED_PURCHASE,
         payload: coupon
     };
 }
 
-export function deletedCouponAction(id: number): PurchaseAction {
+export function deletedPurchaseAction(id: number): PurchaseAction {
     return {
         type: ActionType.DELETED_PURCHASE,
         payload: id

@@ -43,7 +43,7 @@ function CompanyCard(props: CompanyProps): JSX.Element {
                 {isOpen && (
                     <p className="companyCoupons">
                         {props.company.coupons.map((c, idx) => (
-                            <CouponCard key={"c" + idx} coupon={c} />
+                            <CouponCard key={"c" + idx} coupon={c} companyId={0} />
                         ))}
                     </p>
                 )}

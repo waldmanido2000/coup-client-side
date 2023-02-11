@@ -43,7 +43,7 @@ function CouponList(): JSX.Element {
             </div>
             <div className="CouponList row">
                 {coupons?.length > 0
-                    ? <>{coupons.map((c, idx) => <CouponCard key={"c" + idx} coupon={c} />)}</>
+                    ? <>{coupons.map((c, idx) => <CouponCard key={"c" + idx} coupon={c} companyId={companyId} />)}</>
                     : <Page404 />}
             </div>
         </>

@@ -2,15 +2,18 @@ import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../../Assets/not-found.jpg";
 import "./CouponCard.css";
-import { FaShekelSign } from "react-icons/fa";
+import { FaEdit, FaShekelSign, FaTrash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 interface CouponProps {
 	coupon: CouponModel;
+	companyId: number;
 }
 
 function CouponCard(props: CouponProps): JSX.Element {
 	const [imageUrl, setImageUrl] = useState(props.coupon.image);
 	const [imageError, setImageError] = useState(false);
+	const navigate = useNavigate();
 
 	const handleImageError = () => {
 		setImageError(true);
@@ -33,11 +36,21 @@ function CouponCard(props: CouponProps): JSX.Element {
 				return "";
 		}
 	};
+    const deleteCoupon = (id: number) => {
+        navigate('../company/'+props.companyId+ '/company-coupon/delete/' + id);
+    }
 
+    const editCoupon = (id: number) => {
+        navigate('/company-coupon/edit/' + id);
+    }
 	return (
 
 		<div className={`CouponCard ${categoryClass(props.coupon.category)}`}>
 			<h4>{props.coupon.title}</h4>
+			<div className="row">
+                <button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
+                <button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
+            </div>
 			<div className="row">
 				<div>
 					<p>Description: {props.coupon.description}</p>

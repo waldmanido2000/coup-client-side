@@ -47,7 +47,7 @@ function EditCompany(): JSX.Element {
     const { register, handleSubmit, control, formState: { errors, isDirty, isValid } }
         = useForm<CompanyModel>({ defaultValues: defaultValuesObj, mode: "all", resolver: yupResolver(schema) });
 
-    const { dirtyFields } = useFormState({control});
+    const { dirtyFields } = useFormState({ control });
 
 
 
@@ -56,7 +56,9 @@ function EditCompany(): JSX.Element {
         <div className="EditTodo">
             <h1>Edit Company</h1>
             <form onSubmit={handleSubmit(putCompany)}>
+                <label htmlFor="name">Name</label>
                 <input disabled={true} id="name" name="name" type="string" placeholder="Name..." value={toUpdate.name} />
+                <label htmlFor="id">Id</label>
                 <input disabled={true} id="id" name="id" type="number" placeholder="Id..." value={id} />
 
                 {(errors.email) ? <span>{errors.email?.message}</span> : <label htmlFor="email">Email</label>}

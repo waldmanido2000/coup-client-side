@@ -71,26 +71,26 @@ const AddCoupon = () => {
 
                 <label htmlFor="title">Title</label>
                 <input {...register("title")} id="title" name="title" type="text" placeholder="Title..." />
+                {(errors.title) ? <span>{errors.title?.message}</span> : null}
 
                 <label htmlFor="description">Description</label>
                 <input {...register("description")} id="description" name="description" type="text" placeholder="Description..." />
+                {(errors.description) ? <span>{errors.description?.message}</span> : null}
 
                 <label htmlFor="startDate">Start Date</label>
                 <input {...register("startDate")} id="startDate" name="startDate" type="date" placeholder="Start Date..." />
+                {(errors.startDate) ? <span>{errors.startDate?.message}</span> : null}
 
                 <label htmlFor="endDate">End Date</label>
                 <input {...register("endDate")} id="endDate" name="endDate" type="date" placeholder="End Date..." />
-
                 {(errors.endDate) ? <span>{errors.endDate?.message}</span> : null}
 
                 <label htmlFor="amount">Amount</label>
                 <input {...register("amount")} id="amount" name="amount" type="number" placeholder="Amount..." />
-
                 {(errors.amount) ? <span>{errors.amount?.message}</span> : null}
 
                 <label htmlFor="price">Price</label>
                 <input {...register("price")} id="price" name="price" type="number" placeholder="Price..." />
-
                 {(errors.price) ? <span>{errors.price?.message}</span> : null}
 
                 <label htmlFor="image">Image URL</label>
