@@ -146,10 +146,14 @@ class WebApi {
   }
 
   public editCompanyCoupon(
+    companyId: number,
     id: number,
     coupon: CouponPayloadModel
   ): Promise<AxiosResponse<CouponModel>> {
-    return axios.put<CouponModel>(this.companyApi + "/" + id, coupon);
+    return axios.put<CouponModel>(
+      this.companyApi + "/" + companyId + "/coupon/" + id,
+      coupon
+    );
   }
 }
 

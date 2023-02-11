@@ -10,8 +10,8 @@ interface CompanyProps {
 }
 
 function CompanyCard(props: CompanyProps): JSX.Element {
-    const [float, setFloat] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [float, setFloat] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const deleteCompany = (id: number) => {

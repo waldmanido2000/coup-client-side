@@ -5,8 +5,6 @@ import { gotAllCompaniesAction } from "../../../../Redux/CompanyAppState";
 import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
-import CompanyCard from "../../../Cards/CompanyCard/CompanyCard";
-import Page404 from "../../../PagesArea/MainArea/Page404/Page404";
 import "./SingleCompany.css";
 
 interface CompanyProps {

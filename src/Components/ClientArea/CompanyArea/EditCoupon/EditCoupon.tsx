@@ -21,7 +21,8 @@ const options = [
 
 function EditCoupon(): JSX.Element {
     const params = useParams();
-    const id = +(params.id || 0)
+    const id = +(params.id || 0);
+    const companyId = +(params.companyId || 0);
 
     const toUpdate = store.getState().couponsReducer.coupons.filter(c => c.id === id)[0];
     const [obj, setObj] = useState<CouponModel>(toUpdate);
@@ -47,7 +48,7 @@ function EditCoupon(): JSX.Element {
 
 
     const putCoupon = async (coupon: CouponPayloadModel) => {
-        await webApi.editCompanyCoupon(id, coupon)
+        await webApi.editCompanyCoupon(companyId, id, coupon)
             .then(res => {
                 store.dispatch(updatedCouponAction(res.data));
                 notify.success('Woho coupon updated successfully');

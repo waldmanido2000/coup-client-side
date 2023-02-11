@@ -10,10 +10,24 @@ import CouponCard from "../../../Cards/CouponCard/CouponCard";
 import Page404 from "../../../PagesArea/MainArea/Page404/Page404";
 import "./CouponList.css";
 
-function CouponList(): JSX.Element {
+const options = [
+    { value: "FOOD", label: "FOOD" },
+    { value: "VACATION", label: "VACATION" },
+    { value: "CARS", label: "CARS" },
+    { value: "CLOTHES", label: "CLOTHES" },
+    { value: "RESTAURANT", label: "RESTAURANT" },
+    { value: "ELECTRICITY", label: "ELECTRICITY" }
+];
+interface CouponListProps {
+    companyId: number;
+  }
+  
+function CouponList(props: CouponListProps): JSX.Element {
     const navigate = useNavigate();
-    const companyId = 1; //tbd
+    const companyId = props.companyId;
     const [coupons, setCoupons] = useState<CouponModel[]>([]);
+    const [maxPrice, setMaxPrice] = useState<number>(0);
+    const [category, setCategory] = useState<string>();
     useEffect(() => {
         // const token = store.getState().userReducer.user.token;
         // if (!token) {
@@ -38,14 +52,31 @@ function CouponList(): JSX.Element {
     }, []);
     return (
         <>
-            <div className="row">
+            <div className="CouponListButtons row">
                 <button className="cardButton" onClick={() => navigate('/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
+                <label htmlFor="maxPrice">Filter by max price:</label>
+                <input type="number" id="maxPrice" name="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
+
+                <label htmlFor="category">Filter by category:</label>
+                <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="">All</option>
+                    {options.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="CouponList row">
                 {coupons?.length > 0
-                    ? <>{coupons.map((c, idx) => <CouponCard key={"c" + idx} coupon={c} companyId={companyId} />)}</>
+                    ? <>{coupons
+                        .filter(c => maxPrice === 0 || c.price <= maxPrice)
+                        .filter(c => !category || c.category === category)
+                        .map((c, idx) => <CouponCard key={"c" + idx} coupon={c} companyId={companyId} />)
+                    }</>
                     : <Page404 />}
             </div>
+
         </>
     );
 }

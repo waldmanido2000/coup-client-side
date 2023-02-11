@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deletedCompanyAction } from "../../../../Redux/CompanyAppState";
 import { deletedCouponAction } from "../../../../Redux/CouponAppState";
 import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";

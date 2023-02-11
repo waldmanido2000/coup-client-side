@@ -19,7 +19,7 @@ function CouponCard(props: CouponProps): JSX.Element {
 		setImageError(true);
 	};
 	const categoryClass = (category: string) => {
-		switch ( category.toLowerCase()) {
+		switch (category.toLowerCase()) {
 			case "cars":
 				return "car";
 			case "restaurant":
@@ -36,21 +36,21 @@ function CouponCard(props: CouponProps): JSX.Element {
 				return "";
 		}
 	};
-    const deleteCoupon = (id: number) => {
-        navigate('../company/'+props.companyId+ '/company-coupon/delete/' + id);
-    }
+	const deleteCoupon = (id: number) => {
+		navigate('../company/' + props.companyId + '/company-coupon/delete/' + id);
+	}
 
-    const editCoupon = (id: number) => {
-        navigate('/company-coupon/edit/' + id);
-    }
+	const editCoupon = (id: number) => {
+		navigate('../company/' + props.companyId + '/company-coupon/edit/' + id);
+	}
 	return (
 
 		<div className={`CouponCard ${categoryClass(props.coupon.category)}`}>
 			<h4>{props.coupon.title}</h4>
 			<div className="row">
-                <button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
-                <button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
-            </div>
+				<button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
+				<button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
+			</div>
 			<div className="row">
 				<div>
 					<p>Description: {props.coupon.description}</p>

@@ -8,7 +8,6 @@ function Menu(): JSX.Element {
             <Link className="Hide" to={'About'} >About</Link>
             <Link className="Hide" to={'companies'} >Companies</Link>
             <Link className="Hide" to={'customers'} >Customers</Link>
-            <Link className="Hide" to={'company-coupons'} >Coupons</Link>
         </div>
     );
 }

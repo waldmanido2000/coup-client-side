@@ -306,3 +306,25 @@ form span {
   border: 1px solid var(--darker-color);
   margin-bottom: 0.8em;;
 }
+
+.CouponListButtons {
+justify-content: space-evenly;
+padding: var(--layout-padding);
+}
+.CompanyDetails > * {
+  padding-bottom: var(--layout-padding);
+  border-bottom: 2px dashed var(--darker-color);
+  margin-bottom: var(--layout-padding);
+}
+.adminEntities {
+  width: fit-content;
+  margin: var(--layout-padding);
+  border: var(--darker-color) 2px solid;
+  padding: var(--layout-padding);
+  border-radius: 10%;
+  background-color: var(--light-color);
+  transition: 0.5s;
+}
+.adminEntities:hover {
+  filter: invert();
+}
