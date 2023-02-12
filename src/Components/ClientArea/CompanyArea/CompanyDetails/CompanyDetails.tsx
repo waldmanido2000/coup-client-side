@@ -19,10 +19,11 @@ function CompanyDetails(props: CompanyDetailsProps): JSX.Element {
         //     navigate("/login");
         // }
 
-        webApi.getSingleCompanyById(props.companyId)
+        webApi.getCompanyDetails(props.companyId)
             .then(res => {
                 // Update local state
                 setCompany(res.data);
+                console.log(res.data);
 
                 // notify.success('Woho I got my element from server side!!!');
             })

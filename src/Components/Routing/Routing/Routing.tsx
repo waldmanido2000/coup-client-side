@@ -10,9 +10,7 @@ import DeleteCompany from "../../ClientArea/AdminArea/DeleteCompany/DeleteCompan
 import DeleteCustomer from "../../ClientArea/AdminArea/DeleteCustomer/DeleteCustomer";
 import EditCompany from "../../ClientArea/AdminArea/EditCompany/EditCompany";
 import EditCustomer from "../../ClientArea/AdminArea/EditCustomer/EditCustomer";
-import SingleCompany from "../../ClientArea/AdminArea/SingleCompany/SingleCompany";
 import AddCoupon from "../../ClientArea/CompanyArea/AddCoupon/AddCoupon";
-import CouponList from "../../ClientArea/CompanyArea/CouponList/CouponList";
 import DeleteCoupon from "../../ClientArea/CompanyArea/DeleteCoupon/DeleteCoupon";
 import EditCoupon from "../../ClientArea/CompanyArea/EditCoupon/EditCoupon";
 import About from "../../PagesArea/MainArea/About/About";
@@ -38,7 +36,7 @@ function Routing(): JSX.Element {
                 <Route path="/customer/add" element={<AddCustomer />} />
                 <Route path="/customer/edit/:id" element={<EditCustomer />} />
                 <Route path="/customer/delete/:id" element={<DeleteCustomer />} />
-                <Route path="/company-coupon/add" element={<AddCoupon />} />
+                <Route path="company/:companyId/company-coupon/add" element={<AddCoupon />} />
                 <Route path="company/:companyId/company-coupon/edit/:id" element={<EditCoupon />} />
                 <Route path="company/:companyId/company-coupon/delete/:id" element={<DeleteCoupon />} />
 

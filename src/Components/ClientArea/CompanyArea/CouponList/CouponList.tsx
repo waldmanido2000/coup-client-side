@@ -53,7 +53,7 @@ function CouponList(props: CouponListProps): JSX.Element {
     return (
         <>
             <div className="CouponListButtons row">
-                <button className="cardButton" onClick={() => navigate('/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
+                <button className="cardButton" onClick={() => navigate('company/'+companyId+'/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
                 <label htmlFor="maxPrice">Filter by max price:</label>
                 <input type="number" id="maxPrice" name="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
 

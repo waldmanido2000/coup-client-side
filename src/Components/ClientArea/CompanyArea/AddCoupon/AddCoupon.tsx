@@ -4,9 +4,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { CouponModel, CouponPayloadModel } from "../../../../Models/CouponModel";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const companyId: number = 1;
 const options = [
     { value: "FOOD", label: "FOOD" },
     { value: "VACATION", label: "VACATION" },
@@ -17,6 +16,8 @@ const options = [
 ];
 
 const AddCoupon = (): JSX.Element => {
+    const params = useParams();
+    const companyId = +(params.companyId || 0);
     const navigate = useNavigate();
 
     // Define the schema for validating the form input using yup
@@ -52,7 +53,7 @@ const AddCoupon = (): JSX.Element => {
             .then(() => {
                 // Show a success notification
                 notify.success('Coupon added successfully');
-                navigate("/company-coupons");
+                navigate("/");
             })
             .catch(err => {
                 // Show an error notification

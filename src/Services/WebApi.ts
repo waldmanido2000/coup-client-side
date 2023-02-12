@@ -100,11 +100,10 @@ class WebApi {
     return axios.delete<any>(this.customerApi + "/" + id);
   }
 
-  public addCustomerCoupon(
-    customer: CustomerPayloadModel
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.post<CouponModel>(this.customerApi, customer);
-  }
+  public purchaseCoupon(customerId: number, coupon: CouponPayloadModel): Promise<AxiosResponse<void>> {
+    return axios.post<void>(this.customerApi+'${customerId}/coupons/purchase', coupon);
+}
+
 
   public editCustomerCoupon(
     id: number,
@@ -114,6 +113,12 @@ class WebApi {
   }
 
   // ------------------------ Company actions ------------------------
+  public getCompanyDetails(
+    id: number
+  ): Promise<AxiosResponse<CompanyModel>> {
+    return axios.get<CompanyModel>(this.companyApi + "/" + id + "/details" );
+  }
+
   public getAllCompanyCoupons(
     id: number
   ): Promise<AxiosResponse<CouponModel[]>> {
@@ -123,7 +128,7 @@ class WebApi {
   public getSingleCompanyCouponById(
     id: number
   ): Promise<AxiosResponse<CouponModel>> {
-    return axios.get<CouponModel>(this.companyApi + "/" + id);
+    return axios.get<CouponModel>(this.companyApi + "/" + id );
   }
 
   public deleteCompanyCoupon(

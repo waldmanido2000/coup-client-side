@@ -19,6 +19,9 @@ body,
   --dark-color: #ff7f50;
   --darker-color: #404969;
   --layout-padding: 0.5em;
+  --control-admin-bg: yellow;
+  --control-company-bg: green;
+  --control-customer-bg: purple;
 }
 
 body {
@@ -322,9 +325,21 @@ padding: var(--layout-padding);
   border: var(--darker-color) 2px solid;
   padding: var(--layout-padding);
   border-radius: 10%;
-  background-color: var(--light-color);
+  background-color: var(--lighter-color);
   transition: 0.5s;
 }
 .adminEntities:hover {
   filter: invert();
+}
+.CouponList .CouponCard {
+  margin: var(--layout-padding);
+}
+.AdminScreen {
+  background-color: var(--control-admin-bg);
+}
+.CompanyDetails {
+  background-color: var(--control-company-bg);
+}
+.CustomerDetails {
+background-color: var(--control-customer-bg);
 }

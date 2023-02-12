@@ -12,7 +12,7 @@ function DeleteCoupon(): JSX.Element {
     const couponTitle = store.getState().couponsReducer.coupons.filter(c => c.id === id)[0].title.toUpperCase();
     const navigate = useNavigate();
     const abort = () => {
-        navigate("/company-coupons");
+        navigate("/");
     }
 
     const proceed = async () => {
@@ -20,7 +20,7 @@ function DeleteCoupon(): JSX.Element {
             .then(res => {
                 notify.success('Woho deleted successfully');
                 store.dispatch(deletedCouponAction(id));
-                navigate("/company-coupons");
+                navigate("/");
             })
             .catch(err => {
                 notify.error(err);
