@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk&display=swap");
 
 html,
 body,
@@ -6,10 +6,8 @@ body,
   width: 100%;
   height: 100%;
   margin: 0;
-  font-family: 'Righteous', cursive, 'Space Grotesk', sans-serif;
-
+  font-family: "Righteous", cursive, "Space Grotesk", sans-serif;
 }
-
 
 /* root vars */
 
@@ -22,6 +20,7 @@ body,
   --control-admin-bg: yellow;
   --control-company-bg: green;
   --control-customer-bg: purple;
+  --card-color: #40496990;
 }
 
 body {
@@ -100,7 +99,7 @@ body {
 .row {
   display: flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -108,7 +107,7 @@ body {
 .col {
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 }
@@ -122,7 +121,8 @@ form {
   align-items: center;
 }
 
-form input[type="text"], input[type="datetime-local"] {
+form input[type="text"],
+input[type="datetime-local"] {
   width: 200px;
   height: 25px;
 }
@@ -151,9 +151,13 @@ form span {
   font-weight: 700;
 }
 
-/* company cards */
+/* cards */
 
-.CompanyCard, .DeleteCompany,.CustomerCard, .DeleteCustomer, .DeleteCoupon {
+.CompanyCard,
+.DeleteCompany,
+.CustomerCard,
+.DeleteCustomer,
+.DeleteCoupon {
   display: flex;
   box-shadow: 8px 6px 8px -2px var(--darker-color);
   flex-direction: column;
@@ -161,10 +165,13 @@ form span {
   margin: 1em;
   background-color: var(--lighter-color);
   padding: 1em;
+  padding-bottom: 0.1em;
   justify-content: center;
   align-items: center;
   border-radius: 10% 5%;
+  border-bottom: 25px solid var(--card-color);
 }
+
 .showHide {
   padding: 0.2em;
   display: flex;
@@ -183,7 +190,9 @@ form span {
   cursor: pointer;
 }
 
-.rendered-form h3, .cardButton, .buttons button {
+.rendered-form h3,
+.cardButton,
+.buttons button {
   cursor: pointer;
   width: 100%;
   background-color: var(--darker-color);
@@ -194,7 +203,8 @@ form span {
   width: fit-content;
 }
 
-.rendered-form h3:hover, .cardButton:hover {
+.rendered-form h3:hover,
+.cardButton:hover {
   filter: invert();
   transition: 0.4s;
   border: inset 2px;
@@ -209,14 +219,16 @@ form span {
   z-index: 100;
   opacity: 1 !important;
 }
-.float h2, p, h3 {
+.float h2,
+p,
+h3 {
   margin: 0.2em;
 }
-.current *{
+.current * {
   pointer-events: all;
-
 }
-:has(.float) > .CompanyCard, :has(.float) > .CustomerCard {
+:has(.float) > .CompanyCard,
+:has(.float) > .CustomerCard {
   opacity: 30%;
   box-shadow: none;
   pointer-events: none;
@@ -224,25 +236,30 @@ form span {
 
 /* company cards coupons */
 
-.companyCoupons, .customerCoupons {
+.companyCoupons,
+.customerCoupons {
   max-height: 400px;
   overflow: auto;
   width: 70vh;
 }
-.companyCoupons::-webkit-scrollbar, .customerCoupons::-webkit-scrollbar {
+.companyCoupons::-webkit-scrollbar,
+.customerCoupons::-webkit-scrollbar {
   width: 10px;
 }
 
-.companyCoupons::-webkit-scrollbar-track, .customerCoupons::-webkit-scrollbar-track {
+.companyCoupons::-webkit-scrollbar-track,
+.customerCoupons::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px var(--light-color);
   border-radius: 10px;
 }
 
-.companyCoupons::-webkit-scrollbar-thumb, .customerCoupons::-webkit-scrollbar-thumb {
+.companyCoupons::-webkit-scrollbar-thumb,
+.customerCoupons::-webkit-scrollbar-thumb {
   background: var(--darker-color);
   border-radius: 7px;
 }
-.companyCoupons > p, .customerCoupons > p {
+.companyCoupons > p,
+.customerCoupons > p {
   display: flex;
   flex-direction: column;
   margin: 1em;
@@ -251,7 +268,7 @@ form span {
   box-shadow: 7px 5px 7px -2px var(--darker-color);
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-items: center;
   align-items: center;
@@ -259,32 +276,49 @@ form span {
   width: 100%;
   padding: 1vh;
 }
-.buttons button, .cardButton {
+.buttons button,
+.cardButton {
   font-size: 1.2em;
   padding: 0.4em;
   display: flex;
   justify-items: center;
   align-items: center;
-  font-family: 'Righteous', cursive, 'Space Grotesk', sans-serif;
+  font-family: "Righteous", cursive, "Space Grotesk", sans-serif;
 }
-.CouponCard p, .PurchaseCard p {
+.CouponCard p,
+.PurchaseCard p {
   display: flex;
   flex-direction: column;
   text-align: justify;
   align-items: flex-start;
   justify-items: flex-start;
+  overflow-wrap: break-word;
+  max-width: 12em;
+  margin-right: var(--layout-padding);
 }
-.CouponCard .row, .PurchaseCard .row {
+.CouponCard .row,
+.PurchaseCard .row {
   display: flex;
   justify-items: center;
   align-items: center;
   justify-content: space-between;
   padding: 0em 1.5em 0.5em 1.5em;
 }
-.CouponCard img, .PurchaseCard img {
+.CouponCard img,
+.PurchaseCard img {
   width: 200px;
   height: 200px;
   object-fit: cover;
+}
+.couponCardButtons {
+  border-bottom: 2px dashed;
+  margin-bottom: var(--layout-padding);
+}
+.couponCardButtons h4 {
+  margin: var(--layout-padding);
+}
+.couponCardButtons .row {
+  padding: var(--layout-padding);
 }
 .car {
   background-image: url("\\Assets\\cars.jpg");
@@ -304,21 +338,18 @@ form span {
 .clothes {
   background-image: url("\\Assets\\clothes.jpg");
 }
-.CouponCard, .PurchaseCard {
+.CouponCard,
+.PurchaseCard {
   background-size: cover;
-  border: 1px solid var(--darker-color);
-  margin-bottom: 0.8em;;
+  /* border: 1px solid var(--darker-color); */
+  margin-bottom: 0.8em;
 }
 
 .CouponListButtons {
-justify-content: space-evenly;
-padding: var(--layout-padding);
+  justify-content: space-evenly;
+  padding: var(--layout-padding);
 }
-.CompanyDetails > * {
-  padding-bottom: var(--layout-padding);
-  border-bottom: 2px dashed var(--darker-color);
-  margin-bottom: var(--layout-padding);
-}
+
 .adminEntities {
   width: fit-content;
   margin: var(--layout-padding);
@@ -331,15 +362,31 @@ padding: var(--layout-padding);
 .adminEntities:hover {
   filter: invert();
 }
-.CouponList .CouponCard {
+.CouponList .CouponCard,
+.PurchaseList .PurchaseCard {
   margin: var(--layout-padding);
 }
 .AdminScreen {
-  background-color: var(--control-admin-bg);
+  border: 2px solid var(--control-admin-bg);
 }
 .CompanyDetails {
-  background-color: var(--control-company-bg);
+  border: 2px solid var(--control-company-bg);
 }
 .CustomerDetails {
-background-color: var(--control-customer-bg);
+  border: 2px solid var(--control-customer-bg);
+}
+.CouponListButtons label,
+.PurchaseListButtons label {
+  margin: var(--layout-padding);
+}
+.PurchaseItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: var(--layout-padding);
+  box-shadow: 8px 6px 8px -2px var(--darker-color);
+  border: 1px solid;
+  padding-bottom: var(--layout-padding);
 }

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { CompanyModel } from "../../../../Models/CompanyModel";
-import { gotAllCouponsAction } from "../../../../Redux/CouponAppState";
-import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import CouponList from "../CouponList/CouponList";
@@ -31,9 +29,9 @@ function CompanyDetails(props: CompanyDetailsProps): JSX.Element {
     }, []);
     return (
         <div className="CompanyDetails">
-            <h3>Company name: {company?.name}</h3>
-            <p>company email: {company?.email}</p>
-            <h3>Company's Coupons list:</h3>
+            <h3>Hello {company?.name} owner!</h3>
+            <p>Your email is: {company?.email}</p>
+            <h3>Your Company's Coupons list:</h3>
             <CouponList companyId={props.companyId} />
         </div>
     );

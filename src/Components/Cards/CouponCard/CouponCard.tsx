@@ -46,10 +46,12 @@ function CouponCard(props: CouponProps): JSX.Element {
 	return (
 
 		<div className={`CouponCard ${categoryClass(props.coupon.category)}`}>
-			<h4>{props.coupon.title}</h4>
-			<div className="row">
-				<button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
-				<button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
+			<div className="row couponCardButtons">
+				<h4>{props.coupon.title}</h4>
+				<div className="row">
+					<button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
+					<button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
+				</div>
 			</div>
 			<div className="row">
 				<div>

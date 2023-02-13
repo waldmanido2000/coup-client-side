@@ -14,7 +14,7 @@ function Home(): JSX.Element {
             {/* tbd */}
             <AdminScreen/>
 			<CompanyDetails companyId={5}/>
-			<CustomerDetails/>
+			<CustomerDetails customerId={3}/>
         </div>
     );
 }

@@ -86,8 +86,16 @@ class WebApi {
     );
   }
   // ------------------------ Customer actions ------------------------
-  public getAllCustomerCoupons(): Promise<AxiosResponse<CouponModel[]>> {
-    return axios.get<CouponModel[]>(this.customerApi);
+  public getCustomerDetails(
+    id: number
+  ): Promise<AxiosResponse<CustomerModel>> {
+    return axios.get<CustomerModel>(this.customerApi + "/" + id + "/details" );
+  }
+
+  public getAllCustomerCoupons(
+    id: number
+  ): Promise<AxiosResponse<CouponModel[]>> {
+    return axios.get<CouponModel[]>(this.customerApi + "/" + id + "/coupons");
   }
 
   public getSingleCustomerCouponById(
@@ -96,21 +104,25 @@ class WebApi {
     return axios.get<CouponModel>(this.customerApi + "/" + id);
   }
 
-  public deleteCustomerCoupon(id: number): Promise<AxiosResponse<any>> {
-    return axios.delete<any>(this.customerApi + "/" + id);
-  }
-
-  public purchaseCoupon(customerId: number, coupon: CouponPayloadModel): Promise<AxiosResponse<void>> {
-    return axios.post<void>(this.customerApi+'${customerId}/coupons/purchase', coupon);
+  public purchaseCoupon(customerId: number, coupon: CouponModel): Promise<AxiosResponse<void>> {
+    return axios.post<void>(this.customerApi + "/" + customerId +"/coupons/purchase", coupon);
 }
 
-
-  public editCustomerCoupon(
-    id: number,
-    customer: CustomerPayloadModel
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.put<CouponModel>(this.customerApi + "/" + id, customer);
+public getAllAvailableCoupons(
+  ): Promise<AxiosResponse<CouponModel[]>> {
+    return axios.get<CouponModel[]>(this.customerApi + "/coupons/available");
   }
+
+//   public deleteCustomerCoupon(id: number): Promise<AxiosResponse<any>> {
+//     return axios.delete<any>(this.customerApi + "/" + id);
+//   }
+
+//   public editCustomerCoupon(
+//     id: number,
+//     customer: CustomerPayloadModel
+//   ): Promise<AxiosResponse<CouponModel>> {
+//     return axios.put<CouponModel>(this.customerApi + "/" + id, customer);
+//   }
 
   // ------------------------ Company actions ------------------------
   public getCompanyDetails(

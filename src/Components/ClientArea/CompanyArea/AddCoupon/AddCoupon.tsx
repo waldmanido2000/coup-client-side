@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { CouponModel, CouponPayloadModel } from "../../../../Models/CouponModel";
+import { CouponPayloadModel } from "../../../../Models/CouponModel";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { useNavigate, useParams } from "react-router-dom";

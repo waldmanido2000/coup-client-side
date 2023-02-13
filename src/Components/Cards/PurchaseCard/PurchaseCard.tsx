@@ -3,9 +3,10 @@ import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../..//Assets/not-found.jpg";
 import "./PurchaseCard.css";
 import { FaShekelSign } from "react-icons/fa";
-import store from "../../../Redux/Store";
+import { NumericKeys } from "react-hook-form/dist/types/path/common";
 interface PurchaseProps {
 	purchase: CouponModel;
+	customerId: number;
 }
 
 function PurchaseCard(props:PurchaseProps): JSX.Element {
@@ -39,6 +40,7 @@ function PurchaseCard(props:PurchaseProps): JSX.Element {
 			<div className="row">
 				<div>
 					<p>Description: {props.purchase.description}</p>
+					<p>Category: {props.purchase.category}</p>
 					<p>Ends in: {props.purchase.endDate}</p>
 					<p><span>Cost: {props.purchase.price}<FaShekelSign /></span></p>
 				</div>

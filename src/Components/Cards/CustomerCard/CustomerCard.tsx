@@ -43,7 +43,7 @@ function CustomerCard(props: CustomerProps): JSX.Element {
                 {isOpen && (
                     <p className="companyCoupons">
                         {props.customer.coupons.map((p, idx) => (
-                            <PurchaseCard key={"p" + idx} purchase={p} />
+                            <PurchaseCard key={"p" + idx} purchase={p} customerId={props.customer.id} />
                         ))}
                     </p>
                 )}

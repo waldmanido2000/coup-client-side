@@ -52,7 +52,7 @@ function EditCoupon(): JSX.Element {
             .then(res => {
                 store.dispatch(updatedCouponAction(res.data));
                 notify.success('Woho coupon updated successfully');
-                navigate('/company-coupons');
+                navigate('/');
             })
             .catch(err => {
                 notify.error(err);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaRegPlusSquare } from "react-icons/fa";
+import { FaFilter, FaRegPlusSquare } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { CouponModel } from "../../../../Models/CouponModel";
 import { gotAllCouponsAction } from "../../../../Redux/CouponAppState";
@@ -20,8 +20,8 @@ const options = [
 ];
 interface CouponListProps {
     companyId: number;
-  }
-  
+}
+
 function CouponList(props: CouponListProps): JSX.Element {
     const navigate = useNavigate();
     const companyId = props.companyId;
@@ -53,19 +53,22 @@ function CouponList(props: CouponListProps): JSX.Element {
     return (
         <>
             <div className="CouponListButtons row">
-                <button className="cardButton" onClick={() => navigate('company/'+companyId+'/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
-                <label htmlFor="maxPrice">Filter by max price:</label>
-                <input type="number" id="maxPrice" name="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
-
-                <label htmlFor="category">Filter by category:</label>
-                <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
-                    <option value="">All</option>
-                    {options.map(option => (
-                        <option key={option.value} value={option.value}>
-                            {option.label}
-                        </option>
-                    ))}
-                </select>
+                <button className="cardButton" onClick={() => navigate('company/' + companyId + '/company-coupon/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
+                <div className="row">
+                    <label htmlFor="maxPrice">Filter by max price <FaFilter /></label>
+                    <input type="number" id="maxPrice" name="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
+                </div>
+                <div className="row">
+                    <label htmlFor="category">Filter by category <FaFilter /></label>
+                    <select id="category" name="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option value="">All</option>
+                        {options.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
             <div className="CouponList row">
                 {coupons?.length > 0
