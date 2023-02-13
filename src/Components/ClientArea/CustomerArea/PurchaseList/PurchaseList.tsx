@@ -53,7 +53,7 @@ function PurchaseList(props:PurchaseListProps): JSX.Element {
     return (
         <>
             <div className="PurchaseListButtons row">
-                <button className="cardButton" onClick={() => navigate('customer/' + customerId + '/customer-purchase/add/')}><FaRegPlusSquare />&nbsp;add a new Coupon</button>
+                <button className="cardButton" onClick={() => navigate('customer/' + customerId + '/customer-purchase/add/')}><FaRegPlusSquare />&nbsp;Purchase a Coupon</button>
                 <div className="row">
                     <label htmlFor="maxPrice">Filter by max price <FaFilter /></label>
                     <input type="number" id="maxPrice" name="maxPrice" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />

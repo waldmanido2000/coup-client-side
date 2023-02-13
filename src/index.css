@@ -293,7 +293,7 @@ h3 {
   align-items: flex-start;
   justify-items: flex-start;
   overflow-wrap: break-word;
-  max-width: 12em;
+  max-width: 13em;
   margin-right: var(--layout-padding);
 }
 .CouponCard .row,
@@ -389,4 +389,17 @@ h3 {
   box-shadow: 8px 6px 8px -2px var(--darker-color);
   border: 1px solid;
   padding-bottom: var(--layout-padding);
+}
+.About {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  margin: auto;
+  padding: 2em;
+}
+.About p {
+  text-align: justify;
+  margin-bottom: var(--layout-padding);
 }
