@@ -345,7 +345,7 @@ h3 {
   margin-bottom: 0.8em;
 }
 
-.CouponListButtons {
+.CouponListButtons, .PurchaseListButtons {
   justify-content: space-evenly;
   padding: var(--layout-padding);
 }
