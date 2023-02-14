@@ -14,7 +14,7 @@ function DeleteCompany(): JSX.Element {
     const navigate = useNavigate();
 
     const abort = () => {
-        navigate("/companies");
+        navigate("/");
     }
 
     const proceed = async () => {

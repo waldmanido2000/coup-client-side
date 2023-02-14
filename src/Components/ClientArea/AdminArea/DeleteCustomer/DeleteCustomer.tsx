@@ -14,7 +14,7 @@ function DeleteCustomer(): JSX.Element {
     const navigate = useNavigate();
 
     const abort = () => {
-        navigate("/customers");
+        navigate("/");
     }
 
     const proceed = async () => {

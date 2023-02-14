@@ -34,7 +34,7 @@ function EditCustomer(): JSX.Element {
             .then(res => {
                 store.dispatch(updatedCustomerAction(res.data));
                 notify.success('Woho customer updated successfully');
-                navigate('/customers');
+                navigate('/');
             })
             .catch(err => {
                 notify.error(err);

@@ -34,7 +34,7 @@ function EditCompany(): JSX.Element {
             .then(res => {
                 store.dispatch(updatedCompanyAction(res.data));
                 notify.success('Woho company updated successfully');
-                navigate('/companies');
+                navigate('/');
             })
             .catch(err => {
                 notify.error(err);
