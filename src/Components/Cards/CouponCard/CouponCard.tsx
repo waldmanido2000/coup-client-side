@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../../Assets/not-found.jpg";
 import "./CouponCard.css";
-import { FaEdit, FaShekelSign, FaTrash } from "react-icons/fa";
+import { FaCar, FaEdit, FaHamburger, FaLightbulb, FaPlane, FaShekelSign, FaShoppingBag, FaTrash, FaUtensils } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 interface CouponProps {
@@ -21,7 +21,7 @@ function CouponCard(props: CouponProps): JSX.Element {
 	const categoryClass = (category: string) => {
 		switch (category.toLowerCase()) {
 			case "cars":
-				return "car";
+				return ("car ");
 			case "restaurant":
 				return "restaurant";
 			case "food":
@@ -32,6 +32,24 @@ function CouponCard(props: CouponProps): JSX.Element {
 				return "vacation";
 			case "clothes":
 				return "clothes";
+			default:
+				return "";
+		}
+	};
+	const getCategoryIcon = (category: string) => {
+		switch (category.toLowerCase()) {
+			case "cars":
+				return <FaCar />;
+			case "restaurant":
+				return <FaHamburger />;
+			case "food":
+				return <FaUtensils />;
+			case "electricity":
+				return <FaLightbulb />;
+			case "vacation":
+				return <FaPlane />;
+			case "clothes":
+				return <FaShoppingBag />;
 			default:
 				return "";
 		}
@@ -52,12 +70,15 @@ function CouponCard(props: CouponProps): JSX.Element {
 					<button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
 					<button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
 				</div>
+				<div className="category">
+					<label>{categoryClass(props.coupon.category)}</label>
+					{getCategoryIcon(props.coupon.category)}
+				</div>
 			</div>
-			<div className="row">
+			<div className="row couponDetails">
 				<div>
 					<p>Description: {props.coupon.description}</p>
-					<p>Category: {props.coupon.category}</p>
-					<p>Available since: {props.coupon.startDate}</p>
+					<p>Since: {props.coupon.startDate}</p>
 					<p>Ends in: {props.coupon.endDate}</p>
 					<p><span>Cost: {props.coupon.price}<FaShekelSign /></span></p>
 					<p>Left to purchase: {props.coupon.amount}</p>

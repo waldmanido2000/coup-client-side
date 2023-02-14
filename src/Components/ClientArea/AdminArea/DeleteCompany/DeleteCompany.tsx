@@ -36,8 +36,8 @@ function DeleteCompany(): JSX.Element {
                     <p>pressing on proceed will delete company <b>{companyName}</b> permanently</p>
                 </div>
                 <div className="buttons">
-                    <button onClick={abort}>no, abort!</button>
-                    <button onClick={proceed}>proceed</button>
+                    <p className="add" onClick={abort}>no, abort!</p>
+                    <p className="add" onClick={proceed}>proceed</p>
                 </div>
             </div>
         </div>

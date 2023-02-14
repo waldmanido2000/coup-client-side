@@ -2,14 +2,14 @@ import { useState } from "react";
 import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../..//Assets/not-found.jpg";
 import "./PurchaseCard.css";
-import { FaShekelSign } from "react-icons/fa";
+import { FaCar, FaHamburger, FaLightbulb, FaPlane, FaShekelSign, FaShoppingBag, FaUtensils } from "react-icons/fa";
 import { NumericKeys } from "react-hook-form/dist/types/path/common";
 interface PurchaseProps {
 	purchase: CouponModel;
 	customerId: number;
 }
 
-function PurchaseCard(props:PurchaseProps): JSX.Element {
+function PurchaseCard(props: PurchaseProps): JSX.Element {
 	const [imageUrl, setImageUrl] = useState(props.purchase.image);
 	const [imageError, setImageError] = useState(false);
 
@@ -17,7 +17,7 @@ function PurchaseCard(props:PurchaseProps): JSX.Element {
 		setImageError(true);
 	};
 	const categoryClass = (category: string) => {
-		switch ( category.toLowerCase()) {
+		switch (category.toLowerCase()) {
 			case "cars":
 				return "car";
 			case "restaurant":
@@ -34,13 +34,36 @@ function PurchaseCard(props:PurchaseProps): JSX.Element {
 				return "";
 		}
 	};
-    return (
+	const getCategoryIcon = (category: string) => {
+		switch (category.toLowerCase()) {
+			case "cars":
+				return <FaCar />;
+			case "restaurant":
+				return <FaHamburger />;
+			case "food":
+				return <FaUtensils />;
+			case "electricity":
+				return <FaLightbulb />;
+			case "vacation":
+				return <FaPlane />;
+			case "clothes":
+				return <FaShoppingBag />;
+			default:
+				return "";
+		}
+	};
+	return (
 		<div className={`PurchaseCard ${categoryClass(props.purchase.category)}`}>
-						<h4>{props.purchase.title}</h4>
-			<div className="row">
+			<div className="row couponCardButtons">
+				<h4>{props.purchase.title}</h4>
+				<div className="category">
+					<label>{categoryClass(props.purchase.category)}</label>
+					{getCategoryIcon(props.purchase.category)}
+				</div>
+			</div>
+			<div className="row couponDetails">
 				<div>
 					<p>Description: {props.purchase.description}</p>
-					<p>Category: {props.purchase.category}</p>
 					<p>Ends in: {props.purchase.endDate}</p>
 					<p><span>Cost: {props.purchase.price}<FaShekelSign /></span></p>
 				</div>
@@ -53,8 +76,8 @@ function PurchaseCard(props:PurchaseProps): JSX.Element {
 					}
 				</div>
 			</div>
-        </div>
-    );
+		</div>
+	);
 }
 
 export default PurchaseCard;

@@ -191,8 +191,8 @@ form span {
 }
 
 .rendered-form h3,
-.cardButton,
-.buttons button {
+.buttons button,
+.add {
   cursor: pointer;
   width: 100%;
   background-color: var(--darker-color);
@@ -202,12 +202,18 @@ form span {
   border: outset 2px;
   width: fit-content;
 }
-
 .rendered-form h3:hover,
-.cardButton:hover {
-  filter: invert();
+.cardButton:hover,
+.buttons button,
+.add:hover {
   transition: 0.4s;
+  cursor: pointer;
+}
+.rendered-form h3:hover,
+.buttons button,
+.add:hover {
   border: inset 2px;
+  filter: invert();
 }
 .float {
   position: fixed;
@@ -278,18 +284,24 @@ h3 {
 }
 .buttons button,
 .cardButton {
+  margin: 0.2em;
+  border: none;
+  background-color: inherit;
+  font-size: 1.1em;;
+}
+.buttons button, .add {
   font-size: 1.2em;
-  padding: 0.4em;
+  font-family: "Righteous", cursive, "Space Grotesk", sans-serif;
+  padding: 0.2em;
   display: flex;
   justify-items: center;
   align-items: center;
-  font-family: "Righteous", cursive, "Space Grotesk", sans-serif;
 }
 .CouponCard p,
 .PurchaseCard p {
   display: flex;
   flex-direction: column;
-  text-align: justify;
+  text-align: left;
   align-items: flex-start;
   justify-items: flex-start;
   overflow-wrap: break-word;
@@ -302,7 +314,10 @@ h3 {
   justify-items: center;
   align-items: center;
   justify-content: space-between;
-  padding: 0em 1.5em 0.5em 1.5em;
+}
+.couponDetails {
+  
+  padding: 0em 0.5em 0.5em 0.5em;
 }
 .CouponCard img,
 .PurchaseCard img {
@@ -311,16 +326,13 @@ h3 {
   object-fit: cover;
 }
 .couponCardButtons {
-  border-bottom: 2px dashed;
   margin-bottom: var(--layout-padding);
 }
 .couponCardButtons h4 {
   margin: var(--layout-padding);
 }
-.couponCardButtons .row {
-  padding: var(--layout-padding);
-}
-.car {
+/* categories for coupons */
+/* .car {
   background-image: url("\\Assets\\cars.jpg");
 }
 .restaurant {
@@ -337,6 +349,9 @@ h3 {
 }
 .clothes {
   background-image: url("\\Assets\\clothes.jpg");
+} */
+.car, .restaurant, .food, .electricity, .vacation, .clothes {
+background-color: var(--lighter-color);
 }
 .CouponCard,
 .PurchaseCard {
@@ -345,7 +360,8 @@ h3 {
   margin-bottom: 0.8em;
 }
 
-.CouponListButtons, .PurchaseListButtons {
+.CouponListButtons,
+.PurchaseListButtons {
   justify-content: space-evenly;
   padding: var(--layout-padding);
 }
@@ -402,4 +418,20 @@ h3 {
 .About p {
   text-align: justify;
   margin-bottom: var(--layout-padding);
+}
+.category {
+  background-color: var(--dark-color);
+  color: var(--lighter-color);
+  padding: var(--layout-padding);
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+.category label {
+  font-size: 1.2em;
+}
+.category svg {
+  margin-left: var(--layout-padding);
+  font-size: 1em;
+  padding-top: 5px;
 }

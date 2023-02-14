@@ -39,7 +39,7 @@ function CustomerList(): JSX.Element {
     return (
         <>
             <div className="row">
-                <button className="cardButton" onClick={() => navigate('/customer/add/')}><FaRegPlusSquare />&nbsp;add a new Customer</button>
+                <button className="add" onClick={() => navigate('/customer/add/')}><FaRegPlusSquare />&nbsp;add a new Customer</button>
             </div>
             <div className="CustomerList row">
                 {customers?.length > 0

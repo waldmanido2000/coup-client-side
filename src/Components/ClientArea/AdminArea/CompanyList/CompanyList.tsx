@@ -39,7 +39,7 @@ function CompanyList(): JSX.Element {
     return (
         <>
             <div className="row">
-                <button className="cardButton" onClick={() => navigate('/company/add/')}><FaRegPlusSquare />&nbsp;add a new Company</button>
+                <button className="add" onClick={() => navigate('/company/add/')}><FaRegPlusSquare />&nbsp;add a new Company</button>
             </div>
             <div className="CompanyList row">
                 {companies?.length > 0
