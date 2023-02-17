@@ -16,6 +16,9 @@ class Development extends Config{
         // customer service urls
         "customer":"http://localhost:8080/api/customer",
 
+        // login service urls
+        "login":"http://localhost:8080/api/login",
+
     }
 }
 
@@ -32,6 +35,9 @@ class Production extends Config{
 
         // customer service urls
         "customer":"http://localhost:8080/api/customer",
+
+        // login service urls
+        "login":"http://localhost:8080/api/login",
     }
 }
 

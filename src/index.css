@@ -52,7 +52,7 @@ body {
   padding: var(--layout-padding);
   color: var(--lighter-color);
 }
-.Menu > a {
+.Menu > a, .AuthMenu > a {
   color: var(--lighter-color);
   text-decoration: none;
   padding: 0.5em;
@@ -62,8 +62,18 @@ body {
   transition: 0.3s;
   font-size: 1.2em;
 }
+.Menu > a:focus, .AuthMenu > a:focus {
+  color: var(--light-color);
+  background-color: var(--darker-color);
+  text-decoration: none;
+  border-radius: 30% 20% 90% 90%;
+  border-top: 2px outset var(--lighter-color);
+  border-bottom: 2px inset var(--light-color);
+  padding-top: 0.2em;
+}
+
 @media only screen and (min-width: 720px) {
-  .Menu > a:hover {
+  .Menu > a:hover, .AuthMenu > a:hover {
     color: var(--light-color);
     background-color: var(--darker-color);
     text-decoration: none;

@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import global from "./ConstantService";
-import store from "../Redux/Store";
 import { CompanyModel, CompanyPayloadModel } from "../Models/CompanyModel";
 import { CustomerModel, CustomerPayloadModel } from "../Models/CustomerModel";
 import { CouponModel, CouponPayloadModel } from "../Models/CouponModel";
+import { Credentials, User } from "../Models/Auth";
 class WebApi {
   [x: string]: any;
 
@@ -11,11 +11,11 @@ class WebApi {
   private adminCustomersApi = global.urls.customers;
   private companyApi = global.urls.company;
   private customerApi = global.urls.customer;
+  private loginApi = global.urls.login;
 
-  // TODO
-  // public login(credentials: Credentials): Promise<AxiosResponse<User>> {
-  //     return axios.post<User>(this.authApi + "/" + "login", credentials);
-  // }
+  public login(credentials: Credentials): Promise<AxiosResponse<User>> {
+      return axios.post<User>(this.loginApi, credentials);
+  }
 
   // ------------------------ admin companies actions ------------------------
   public getAllCompanies(): Promise<AxiosResponse<CompanyModel[]>> {

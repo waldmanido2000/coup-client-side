@@ -3,6 +3,7 @@ import { combineReducers, createStore } from "redux";
 import { customersReducer } from "./CustomerAppState";
 import { couponsReducer } from "./CouponAppState";
 import { purchasesReducer } from "./PurchaseAppState";
+import { userReducer } from "./UserAppState";
 
 //Multiple Reducers
 const reducers = combineReducers({
@@ -10,6 +11,7 @@ const reducers = combineReducers({
   customersReducer: customersReducer,
   couponsReducer: couponsReducer,
   purchasesReducer: purchasesReducer,
+  userReducer: userReducer,
 });
 const store = createStore(reducers);
 

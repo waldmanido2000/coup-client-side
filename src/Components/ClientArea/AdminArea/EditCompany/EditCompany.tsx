@@ -27,13 +27,11 @@ function EditCompany(): JSX.Element {
             yup.string()
                 .required("password is missing"),
     });
-
-
+const userFromStore = store.getState().userReducer.user;
     const putCompany = async (company: CompanyPayloadModel) => {
         await webApi.editCompany(id, company)
             .then(res => {
                 store.dispatch(updatedCompanyAction(res.data));
-                notify.success('Woho company updated successfully');
                 navigate('/');
             })
             .catch(err => {
@@ -67,6 +65,7 @@ function EditCompany(): JSX.Element {
                 <input {...register("password")} id="password" name="password" type="text" placeholder="Password..." />
 
                 <button type="submit" disabled={!isValid || !isDirty}>Update Company</button>
+                <h2>{userFromStore.clientType}</h2>
 
 
             </form>

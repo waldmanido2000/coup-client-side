@@ -1,6 +1,7 @@
 import "./Header.css";
 // import myImage from './src/Assets/logo.png';
 import myImage from '../../../Assets/logo.png';
+import AuthMenu from "../../AuthArea/AuthMenu/AuthMenu";
 
 function Header(): JSX.Element {
     
