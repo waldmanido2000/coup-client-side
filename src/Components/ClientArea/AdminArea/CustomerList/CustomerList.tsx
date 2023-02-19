@@ -14,10 +14,10 @@ function CustomerList(): JSX.Element {
     const navigate = useNavigate();
     const [customers, setCustomers] = useState<CustomerModel[]>([]);
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
 
         webApi.getAllCustomers(store.getState().userReducer.user.token)
             .then(res => {

@@ -6,6 +6,7 @@ import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { useNavigate, useParams } from "react-router-dom";
 import store from "../../../../Redux/Store";
+import { useEffect } from "react";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -20,7 +21,12 @@ const AddCoupon = (): JSX.Element => {
     const params = useParams();
     const companyId = +(params.companyId || 0);
     const navigate = useNavigate();
-
+    useEffect(() => {
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
     // Define the schema for validating the form input using yup
     const schema = yup.object().shape({
         category: yup.string().required("Category is required"),
@@ -65,7 +71,7 @@ const AddCoupon = (): JSX.Element => {
     return (
         <div className="AddCoupon">
             <h1>Add Coupon</h1>
-            <form onSubmit={handleSubmit(postCoupon)}>
+            <form className="myForm" onSubmit={handleSubmit(postCoupon)}>
                 <label htmlFor="category">Category</label>
                 <select {...register("category")} id="category" name="category">
                     {options.map(option => (

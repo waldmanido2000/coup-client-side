@@ -16,6 +16,10 @@ function DeleteCustomer(): JSX.Element {
     const abort = () => {
         navigate("/");
     }
+    const token = store.getState().userReducer.user.token;
+    if (!token) {
+        navigate("/login");
+    }
 
     const proceed = async () => {
         await webApi.deleteCustomer(id, store.getState().userReducer.user.token)

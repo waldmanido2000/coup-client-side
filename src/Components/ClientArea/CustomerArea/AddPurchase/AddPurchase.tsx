@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CouponModel, CouponPayloadModel } from "../../../../Models/CouponModel";
 import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
@@ -19,14 +19,15 @@ const options = [
 ];
 
 function CouponPurchase(): JSX.Element {
+    const navigate = useNavigate();
     const params = useParams();
     const customerId = +(params.customerId || 0);
     const [availableCoupons, setAvailableCoupons] = useState<CouponModel[]>([]);
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
 
         webApi.getAllAvailableCoupons(store.getState().userReducer.user.token)
             .then(res => {
@@ -82,7 +83,7 @@ function CouponPurchase(): JSX.Element {
                             .filter(c => !category || c.category === category)
                             .map((c, idx) => <div className="PurchaseItem">
                             <PurchaseCard key={"c" + idx} purchase={c} customerId={customerId} />
-                            <button className="cardButton" onClick={() => purchase(c)}>buy this coupon</button>
+                            <button className="add" onClick={() => purchase(c)}>purchase this coupon</button>
                             </div>)}</>
                         : <Page404 />}
                 </div>

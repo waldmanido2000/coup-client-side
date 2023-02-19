@@ -37,7 +37,7 @@ function CustomerCard(props: CustomerProps): JSX.Element {
                 setFloat(currentFloat => !currentFloat);
             }}>
                 <div className="showHide">
-                    <>{isOpen ? "hide coupons" : "show coupons"}</>
+                    <>{isOpen ? "hide purchases" : "show purchases"}</>
                     <>{isOpen ? <FaCaretSquareUp /> : <FaCaretSquareDown />}</>
                 </div>
                 {isOpen && (

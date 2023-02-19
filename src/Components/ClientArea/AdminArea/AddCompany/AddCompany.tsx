@@ -8,13 +8,18 @@ import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { addedCompanyAction } from "../../../../Redux/CompanyAppState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../../../../Models/Auth";
 
 function AddCompany(): JSX.Element {
     const navigate = useNavigate();
     const [user, setUser] = useState<User>(store.getState().userReducer.user);
-
+    useEffect(() => {
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
     // Define the schema for validating the form input using yup
     const schema = yup.object().shape({
         name:
@@ -55,7 +60,7 @@ function AddCompany(): JSX.Element {
         <div className="AddCompany">
             <h1>Add Company</h1>
             {/* Render the form with handleSubmit passing postCompany as the submit function */}
-            <form onSubmit={handleSubmit(postCompany)}>
+            <form className="myForm" onSubmit={handleSubmit(postCompany)}>
                 {/* Display error message if there's an error with the name input */}
                 {(errors.name) ? <span>{errors.name?.message}</span> : <label htmlFor="name">Name</label>}
                 <input {...register("name")} id="name" name="name" type="text" placeholder="Name..." />

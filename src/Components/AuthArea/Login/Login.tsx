@@ -49,7 +49,7 @@ function Login(): JSX.Element {
     return (
         <div className="Login">
             <h2>Login</h2>
-            <form onSubmit={handleSubmit(postLogin)}>
+            <form className="myForm" onSubmit={handleSubmit(postLogin)}>
                 {(!errors.email) ? <label htmlFor="email">Email</label> : <span>{errors.email.message}</span>}
                 <input {...register("email")} type="email" placeholder="email" />
                 {(!errors.password) ? <label htmlFor="password">Password</label> : <span>{errors.password.message}</span>}

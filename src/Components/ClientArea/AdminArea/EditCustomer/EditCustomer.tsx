@@ -18,6 +18,10 @@ function EditCustomer(): JSX.Element {
     const [obj, setObj] = useState<CustomerModel>(toUpdate);
 
     const navigate = useNavigate();
+    const token = store.getState().userReducer.user.token;
+    if (!token) {
+        navigate("/login");
+    }
 
     const schema = yup.object().shape({
         email:
@@ -55,7 +59,7 @@ function EditCustomer(): JSX.Element {
     return (
         <div className="EditTodo">
             <h1>Edit Customer</h1>
-            <form onSubmit={handleSubmit(putCustomer)}>
+            <form className="myForm" onSubmit={handleSubmit(putCustomer)}>
                 <input disabled={true} id="firstName" name="firstName" type="string" placeholder="first name..." value={toUpdate.firstName} />
                 <input disabled={true} id="lastName" name="lastName" type="string" placeholder="Last name..." value={toUpdate.lastName} />
                 <input disabled={true} id="id" name="id" type="number" placeholder="Id..." value={id} />

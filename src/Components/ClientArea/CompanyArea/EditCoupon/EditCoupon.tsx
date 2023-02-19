@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useFormState } from "react-hook-form";
 import { useParams, useNavigate } from "react-router-dom";
 import { CouponModel, CouponPayloadModel } from "../../../../Models/CouponModel";
@@ -28,7 +28,12 @@ function EditCoupon(): JSX.Element {
     const [obj, setObj] = useState<CouponModel>(toUpdate);
 
     const navigate = useNavigate();
-
+    useEffect(() => {
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
     // Define the schema for validating the form input using yup
     const schema = yup.object().shape({
         category: yup.string().required("Category is required"),
@@ -70,7 +75,7 @@ function EditCoupon(): JSX.Element {
     return (
         <div className="EditCoupon">
             <h1>Edit Coupon</h1>
-            <form onSubmit={handleSubmit(putCoupon)}>
+            <form className="myForm" onSubmit={handleSubmit(putCoupon)}>
                 <label htmlFor="id">Id</label>
                 <input disabled={true} id="id" name="id" type="number" placeholder="Id..." value={id} />
                 <label htmlFor="category">Category</label>

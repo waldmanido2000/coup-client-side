@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { deletedCompanyAction } from "../../../../Redux/CompanyAppState";
 import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
-import SingleCompany from "../SingleCompany/SingleCompany";
 
 
 function DeleteCompany(): JSX.Element {
@@ -15,6 +13,10 @@ function DeleteCompany(): JSX.Element {
 
     const abort = () => {
         navigate("/");
+    }
+    const token = store.getState().userReducer.user.token;
+    if (!token) {
+        navigate("/login");
     }
 
     const proceed = async () => {

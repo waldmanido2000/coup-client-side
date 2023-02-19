@@ -3,7 +3,6 @@ import { CouponModel } from "../../../Models/CouponModel";
 import notFoundImage from "../../..//Assets/not-found.jpg";
 import "./PurchaseCard.css";
 import { FaCar, FaHamburger, FaLightbulb, FaPlane, FaShekelSign, FaShoppingBag, FaUtensils } from "react-icons/fa";
-import { NumericKeys } from "react-hook-form/dist/types/path/common";
 interface PurchaseProps {
 	purchase: CouponModel;
 	customerId: number;

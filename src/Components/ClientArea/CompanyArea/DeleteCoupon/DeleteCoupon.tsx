@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletedCouponAction } from "../../../../Redux/CouponAppState";
 import store from "../../../../Redux/Store";
@@ -14,7 +15,12 @@ function DeleteCoupon(): JSX.Element {
     const abort = () => {
         navigate("/");
     }
-
+    useEffect(() => {
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
+    }, []);
     const proceed = async () => {
         await webApi.deleteCompanyCoupon(companyId, id, store.getState().userReducer.user.token)
             .then(res => {

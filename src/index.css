@@ -124,42 +124,51 @@ body {
 
 /* form display classes */
 
-form {
+.myForm {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 600px;
+  background-color: yellow;
+  margin: auto;
 }
 
-form input[type="text"],
-input[type="datetime-local"] {
-  width: 200px;
-  height: 25px;
-}
-
-form button {
-  width: 100%;
-  height: 25px;
-  margin: 5px;
+.myForm input, .myForm button, .myForm select {
+  width: 50%;
+  padding: var(--layout-padding) 0 var(--layout-padding) 0;
   border: none;
-  background-color: #2270be;
-  color: white;
-  font-size: large;
+  margin-bottom: var(--layout-padding);
+}
+.myForm input, .myForm select {
+background-color: var(--darker-color);
+color: var(--lighter-color);
 }
 
-form button:hover {
-  background-color: #6186ab;
+.myForm button {
+  margin: 5px;
+  border-radius: 10px;
+  background-color: var(--dark-color);
+  color: var(--lighter-color);
+  font-size: 1.2em;
+  border: 2px solid var(--darker-color);
 }
 
-form button:disabled {
+.myForm button:hover {
+  background-color: var(--darker-color);
+}
+
+.myForm button:disabled, .myForm input:disabled {
   cursor: not-allowed;
-  background-color: #6186ab;
+  background-color: var(--lighter-color);
+  color: var(--dark-color)
 }
-
-form span {
-  color: red;
+/* form error comments */
+.myForm span {
+  color: var(--dark-color);
   font-weight: 700;
 }
+
 
 /* cards */
 
@@ -341,25 +350,6 @@ h3 {
 .couponCardButtons h4 {
   margin: var(--layout-padding);
 }
-/* categories for coupons */
-/* .car {
-  background-image: url("\\Assets\\cars.jpg");
-}
-.restaurant {
-  background-image: url("\\Assets\\restaurant.jpg");
-}
-.food {
-  background-image: url("\\Assets\\food.jpg");
-}
-.electricity {
-  background-image: url("\\Assets\\electricity.jpg");
-}
-.vacation {
-  background-image: url("\\Assets\\vacation.jpg");
-}
-.clothes {
-  background-image: url("\\Assets\\clothes.jpg");
-} */
 .car, .restaurant, .food, .electricity, .vacation, .clothes {
 background-color: var(--lighter-color);
 }
@@ -393,13 +383,10 @@ background-color: var(--lighter-color);
   margin: var(--layout-padding);
 }
 .AdminScreen {
-  border: 2px solid var(--control-admin-bg);
 }
 .CompanyDetails {
-  border: 2px solid var(--control-company-bg);
 }
 .CustomerDetails {
-  border: 2px solid var(--control-customer-bg);
 }
 .CouponListButtons label,
 .PurchaseListButtons label {

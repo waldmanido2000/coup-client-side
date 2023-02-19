@@ -18,7 +18,7 @@ function AuthMenu(): JSX.Element {
     return (
         <div className="AuthMenu">
             {(user.token)
-                ? <Link to={'logout'} >logout here{user.clientType}</Link>
+                ? <Link to={'logout'} >logout here</Link>
                 : <Link to={'login'} >login here</Link>}
         </div>
     );

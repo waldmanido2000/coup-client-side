@@ -18,6 +18,10 @@ function EditCompany(): JSX.Element {
     const [obj, setObj] = useState<CompanyModel>(toUpdate);
 
     const navigate = useNavigate();
+    const token = store.getState().userReducer.user.token;
+    if (!token) {
+        navigate("/login");
+    }
 
     const schema = yup.object().shape({
         email:
@@ -53,7 +57,7 @@ const userFromStore = store.getState().userReducer.user;
     return (
         <div className="EditTodo">
             <h1>Edit Company</h1>
-            <form onSubmit={handleSubmit(putCompany)}>
+            <form className="myForm" onSubmit={handleSubmit(putCompany)}>
                 <label htmlFor="name">Name</label>
                 <input disabled={true} id="name" name="name" type="string" placeholder="Name..." value={toUpdate.name} />
                 <label htmlFor="id">Id</label>
@@ -65,7 +69,6 @@ const userFromStore = store.getState().userReducer.user;
                 <input {...register("password")} id="password" name="password" type="text" placeholder="Password..." />
 
                 <button type="submit" disabled={!isValid || !isDirty}>Update Company</button>
-                <h2>{userFromStore.clientType}</h2>
 
 
             </form>
