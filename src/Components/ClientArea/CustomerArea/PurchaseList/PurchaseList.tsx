@@ -34,7 +34,7 @@ function PurchaseList(props:PurchaseListProps): JSX.Element {
         //     navigate("/login");
         // }
 
-        webApi.getAllCustomerCoupons(customerId)
+        webApi.getAllCustomerCoupons(customerId, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCoupons(res.data);

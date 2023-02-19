@@ -17,3 +17,8 @@ export interface User {
     token: string;
     clientType: ClientType;
 }
+export interface UserPayload {
+    token: string;
+    clientType: ClientType;
+    id: number;
+}

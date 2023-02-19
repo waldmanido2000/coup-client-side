@@ -18,11 +18,11 @@ function DeleteCompany(): JSX.Element {
     }
 
     const proceed = async () => {
-        await webApi.deleteCompany(id)
+        await webApi.deleteCompany(id, store.getState().userReducer.user.token)
             .then(res => {
                 notify.success('Woho deleted successfully');
                 store.dispatch(deletedCompanyAction(id));
-                navigate("/companies");
+                navigate("/");
             })
             .catch(err => {
                 notify.error(err);

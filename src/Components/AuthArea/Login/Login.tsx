@@ -36,12 +36,15 @@ function Login(): JSX.Element {
         const credentials = { email: obj.email, password: obj.password, clientType: obj.clientType };
         await webApi.login(credentials).then(res => {
             notify.success('login successfully');
-            console.log(res.data);
+            const token = res.data.token;
+            const id = res.data.id
+            console.log(token);
             // Update global State
-            store.dispatch(loggedIn(res.data));
+            store.dispatch(loggedIn({ clientType: obj.clientType, token, id }));
             navigate("/");
         }).catch(err => notify.error(err));
     }
+
 
     return (
         <div className="Login">

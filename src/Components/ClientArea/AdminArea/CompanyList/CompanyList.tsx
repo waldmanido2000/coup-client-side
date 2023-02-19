@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaRegPlusSquare, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../../../Models/Auth";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 import { gotAllCompaniesAction } from "../../../../Redux/CompanyAppState";
 import store from "../../../../Redux/Store";
@@ -12,29 +13,56 @@ import "./CompanyList.css";
 
 function CompanyList(): JSX.Element {
     const navigate = useNavigate();
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
     const [companies, setCompanies] = useState<CompanyModel[]>([]);
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
-
-        webApi.getAllCompanies()
-            .then(res => {
-                // Update local state
-                setCompanies(res.data);
-
-                // Update app state
-                store.dispatch(gotAllCompaniesAction(res.data));
-
-                // notify.success('Woho I got my element from server side!!!');
-            })
-            .catch(err => notify.error(err));
-
-        return store.subscribe(() => {
-            setCompanies(store.getState().companiesReducer.companies);
+        const unsubscribe = store.subscribe(() => {
+            const currentUser = store.getState().userReducer.user;
+            setUser(currentUser);
         });
+        return unsubscribe;
     }, []);
+    useEffect(() => {
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+          navigate("/login");
+        } else if (companies.length === 0) {
+          webApi
+            .getAllCompanies(token)
+            .then((res) => {
+              setCompanies(res.data);
+              store.dispatch(gotAllCompaniesAction(res.data));
+            })
+            .catch((err) => notify.error(err));
+        }
+      }, [user.token, companies]);
+      
+
+
+
+
+    // useEffect(() => {
+    //     const token = store.getState().userReducer.user.token;
+    //     if (!token) {
+    //         navigate("/login");
+    //     }
+
+    //     webApi.getAllCompanies(store.getState().userReducer.user.token)
+    //         .then(res => {
+    //             // Update local state
+    //             setCompanies(res.data);
+
+    //             // Update app state
+    //             store.dispatch(gotAllCompaniesAction(res.data));
+
+    //             // notify.success('Woho I got my element from server side!!!');
+    //         })
+    //         .catch(err => notify.error(err));
+
+    //     return store.subscribe(() => {
+    //         setCompanies(store.getState().companiesReducer.companies);
+    //     });
+    // }, []);
 
     return (
         <>

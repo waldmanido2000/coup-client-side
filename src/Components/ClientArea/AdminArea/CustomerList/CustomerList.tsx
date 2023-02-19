@@ -19,7 +19,7 @@ function CustomerList(): JSX.Element {
         //     navigate("/login");
         // }
 
-        webApi.getAllCustomers()
+        webApi.getAllCustomers(store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCustomers(res.data);

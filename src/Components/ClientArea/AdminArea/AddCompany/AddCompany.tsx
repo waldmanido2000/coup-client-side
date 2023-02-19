@@ -8,9 +8,12 @@ import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { addedCompanyAction } from "../../../../Redux/CompanyAppState";
+import { useState } from "react";
+import { User } from "../../../../Models/Auth";
 
 function AddCompany(): JSX.Element {
     const navigate = useNavigate();
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
 
     // Define the schema for validating the form input using yup
     const schema = yup.object().shape({
@@ -34,7 +37,7 @@ function AddCompany(): JSX.Element {
     // Async function to add a company and dispatch an action
     const postCompany = async (company: CompanyPayloadModel) => {
         // Call the addCompany API and handle the response
-        await webApi.addCompany(company)
+        await webApi.addCompany(company, user.token)
             .then(res => {
                 // Show a success notification and dispatch an action
                 notify.success('Woho company added successfully');

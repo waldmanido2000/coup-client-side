@@ -28,7 +28,7 @@ function CouponPurchase(): JSX.Element {
         //     navigate("/login");
         // }
 
-        webApi.getAllAvailableCoupons()
+        webApi.getAllAvailableCoupons(store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setAvailableCoupons(res.data);
@@ -45,7 +45,7 @@ function CouponPurchase(): JSX.Element {
     });
     function purchase(coupon: CouponModel): void {
       
-        webApi.purchaseCoupon(customerId, coupon)
+        webApi.purchaseCoupon(customerId, coupon, store.getState().userReducer.user.token)
           .then(res => {
             notify.success("Coupon purchased successfully");
           })

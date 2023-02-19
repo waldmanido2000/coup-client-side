@@ -18,11 +18,11 @@ function DeleteCustomer(): JSX.Element {
     }
 
     const proceed = async () => {
-        await webApi.deleteCustomer(id)
+        await webApi.deleteCustomer(id, store.getState().userReducer.user.token)
             .then(res => {
                 notify.success('Woho deleted successfully');
                 store.dispatch(deletedCustomerAction(id));
-                navigate("/customers");
+                navigate("/");
             })
             .catch(err => {
                 notify.error(err);

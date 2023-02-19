@@ -30,7 +30,7 @@ function AddCustomer(): JSX.Element {
     // Async function to add a customer and dispatch an action
     const postCustomer = async (customer: CustomerPayloadModel) => {
         // Call the addCustomer API and handle the response
-        await webApi.addCustomer(customer)
+        await webApi.addCustomer(customer, store.getState().userReducer.user.token)
             .then(res => {
                 // Show a success notification and dispatch an action
                 notify.success('Woho customer added successfully');

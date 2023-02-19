@@ -16,7 +16,7 @@ function DeleteCoupon(): JSX.Element {
     }
 
     const proceed = async () => {
-        await webApi.deleteCompanyCoupon(companyId, id)
+        await webApi.deleteCompanyCoupon(companyId, id, store.getState().userReducer.user.token)
             .then(res => {
                 notify.success('Woho deleted successfully');
                 store.dispatch(deletedCouponAction(id));

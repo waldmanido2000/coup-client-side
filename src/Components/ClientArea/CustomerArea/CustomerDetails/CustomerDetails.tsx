@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { CustomerModel } from "../../../../Models/CustomerModel";
+import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import PurchaseList from "../PurchaseList/PurchaseList";
@@ -8,14 +10,16 @@ interface CustomerDetailsProps {
     customerId: number;
 }
 function CustomerDetails(props: CustomerDetailsProps): JSX.Element {
+    const navigate = useNavigate();
     const [customer, setCustomer] = useState<CustomerModel>();
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
+        const token = store.getState().userReducer.user.token;
+        const id = store.getState().userReducer.user.id;
+        if (!token) {
+            navigate("/login");
+        }
 
-        webApi.getCustomerDetails(props.customerId)
+        webApi.getCustomerDetails(id, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCustomer(res.data);

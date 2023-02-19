@@ -3,7 +3,7 @@ import global from "./ConstantService";
 import { CompanyModel, CompanyPayloadModel } from "../Models/CompanyModel";
 import { CustomerModel, CustomerPayloadModel } from "../Models/CustomerModel";
 import { CouponModel, CouponPayloadModel } from "../Models/CouponModel";
-import { Credentials, User } from "../Models/Auth";
+import { Credentials, User, UserPayload } from "../Models/Auth";
 class WebApi {
   [x: string]: any;
 
@@ -13,165 +13,173 @@ class WebApi {
   private customerApi = global.urls.customer;
   private loginApi = global.urls.login;
 
-  public login(credentials: Credentials): Promise<AxiosResponse<User>> {
-      return axios.post<User>(this.loginApi, credentials);
-  }
+  public login(credentials: Credentials): Promise<AxiosResponse<UserPayload>> {
+    return axios.post<UserPayload>(this.loginApi, credentials);
+  }  
 
   // ------------------------ admin companies actions ------------------------
-  public getAllCompanies(): Promise<AxiosResponse<CompanyModel[]>> {
-    return axios.get<CompanyModel[]>(this.adminCompaniesApi);
+  public getAllCompanies(token: string): Promise<AxiosResponse<CompanyModel[]>> {
+    const headers = { Authorization: token };
+    return axios.get<CompanyModel[]>(this.adminCompaniesApi, { headers });
+}
 
-    // return tokenAxios.get<TaskModel[]>(this.userApi);
-  }
+public getSingleCompanyById(id: number, token: string): Promise<AxiosResponse<CompanyModel>> {
+    const headers = { Authorization: token };
+    return axios.get<CompanyModel>(this.adminCompaniesApi + "/" + id, { headers });
+}
 
-  public getSingleCompanyById(
-    id: number
-  ): Promise<AxiosResponse<CompanyModel>> {
-    return axios.get<CompanyModel>(this.adminCompaniesApi + "/" + id);
+public deleteCompany(id: number, token: string): Promise<AxiosResponse<any>> {
+    const headers = { Authorization: token };
+    return axios.delete<any>(this.adminCompaniesApi + "/" + id, { headers });
+}
 
-    // return tokenAxios.get<TaskModel>(this.userApi + "/" + id);
-  }
+public addCompany(company: CompanyPayloadModel, token: string): Promise<AxiosResponse<CompanyModel>> {
+    const headers = { Authorization: token };
+    return axios.post<CompanyModel>(this.adminCompaniesApi, company, { headers });
+}
 
-  public deleteCompany(id: number): Promise<AxiosResponse<any>> {
-    return axios.delete<any>(this.adminCompaniesApi + "/" + id);
+public editCompany(id: number, company: CompanyPayloadModel, token: string): Promise<AxiosResponse<CompanyModel>> {
+    const headers = { Authorization: token };
+    return axios.put<CompanyModel>(this.adminCompaniesApi + "/" + id, company, { headers });
+}
 
-    // return tokenAxios.delete<any>(this.userApi + "/" + id);
-  }
+public getAllCustomers(token: string): Promise<AxiosResponse<CustomerModel[]>> {
+    const headers = { Authorization: token };
+    return axios.get<CustomerModel[]>(this.adminCustomersApi, { headers });
+}
 
-  public addCompany(
-    company: CompanyPayloadModel
-  ): Promise<AxiosResponse<CompanyModel>> {
-    return axios.post<CompanyModel>(this.adminCompaniesApi, company);
+public getSingleCustomerById(id: number, token: string): Promise<AxiosResponse<CustomerModel>> {
+    const headers = { Authorization: token };
+    return axios.get<CustomerModel>(this.adminCustomersApi + "/" + id, { headers });
+}
 
-    // return tokenAxios.post<TaskModel>(this.userApi, task);
-  }
+public deleteCustomer(id: number, token: string): Promise<AxiosResponse<any>> {
+    const headers = { Authorization: token };
+    return axios.delete<any>(this.adminCustomersApi + "/" + id, { headers });
+}
 
-  public editCompany(
-    id: number,
-    company: CompanyPayloadModel
-  ): Promise<AxiosResponse<CompanyModel>> {
-    return axios.put<CompanyModel>(this.adminCompaniesApi + "/" + id, company);
+public addCustomer(customer: CustomerPayloadModel, token: string): Promise<AxiosResponse<CustomerModel>> {
+    const headers = { Authorization: token };
+    return axios.post<CustomerModel>(this.adminCustomersApi, customer, { headers });
+}
 
-    // return tokenAxios.put<TaskModel>(this.userApi + "/" + id, task);
-  }
+public editCustomer(id: number, customer: CustomerPayloadModel, token: string): Promise<AxiosResponse<CustomerModel>> {
+    const headers = { Authorization: token };
+    return axios.put<CustomerModel>(this.adminCustomersApi + "/" + id, customer, { headers });
+}
 
-  // ------------------------ admin customers actions ------------------------
-  public getAllCustomers(): Promise<AxiosResponse<CustomerModel[]>> {
-    return axios.get<CustomerModel[]>(this.adminCustomersApi);
-  }
+// ------------------------ Customer actions ------------------------
+public getCustomerDetails(
+  id: number, token: string
+): Promise<AxiosResponse<CustomerModel>> {
+  const headers = { Authorization: token };
+  return axios.get<CustomerModel>(
+    `${this.customerApi}/${id}/details`, { headers }
+  );
+}
 
-  public getSingleCustomerById(
-    id: number
-  ): Promise<AxiosResponse<CustomerModel>> {
-    return axios.get<CustomerModel>(this.adminCustomersApi + "/" + id);
-  }
+public getAllCustomerCoupons(
+  id: number, token: string
+): Promise<AxiosResponse<CouponModel[]>> {
+  const headers = { Authorization: token };
+  return axios.get<CouponModel[]>(
+    `${this.customerApi}/${id}/coupons`, { headers }
+  );
+}
 
-  public deleteCustomer(id: number): Promise<AxiosResponse<any>> {
-    return axios.delete<any>(this.adminCustomersApi + "/" + id);
-  }
+public getSingleCustomerCouponById(
+  id: number, token: string
+): Promise<AxiosResponse<CouponModel>> {
+  const headers = { Authorization: token };
+  return axios.get<CouponModel>(
+    `${this.customerApi}/${id}`, { headers }
+  );
+}
 
-  public addCustomer(
-    customer: CustomerPayloadModel
-  ): Promise<AxiosResponse<CustomerModel>> {
-    return axios.post<CustomerModel>(this.adminCustomersApi, customer);
-  }
-
-  public editCustomer(
-    id: number,
-    customer: CustomerPayloadModel
-  ): Promise<AxiosResponse<CustomerModel>> {
-    return axios.put<CustomerModel>(
-      this.adminCustomersApi + "/" + id,
-      customer
-    );
-  }
-  // ------------------------ Customer actions ------------------------
-  public getCustomerDetails(
-    id: number
-  ): Promise<AxiosResponse<CustomerModel>> {
-    return axios.get<CustomerModel>(this.customerApi + "/" + id + "/details" );
-  }
-
-  public getAllCustomerCoupons(
-    id: number
-  ): Promise<AxiosResponse<CouponModel[]>> {
-    return axios.get<CouponModel[]>(this.customerApi + "/" + id + "/coupons");
-  }
-
-  public getSingleCustomerCouponById(
-    id: number
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.get<CouponModel>(this.customerApi + "/" + id);
-  }
-
-  public purchaseCoupon(customerId: number, coupon: CouponModel): Promise<AxiosResponse<void>> {
-    return axios.post<void>(this.customerApi + "/" + customerId +"/coupons/purchase", coupon);
+public purchaseCoupon(
+  customerId: number,
+  coupon: CouponModel,
+  token: string
+): Promise<AxiosResponse<void>> {
+  const headers = { Authorization: token };
+  return axios.post<void>(
+    `${this.customerApi}/${customerId}/coupons/purchase`,
+    coupon,
+    { headers }
+  );
 }
 
 public getAllAvailableCoupons(
-  ): Promise<AxiosResponse<CouponModel[]>> {
-    return axios.get<CouponModel[]>(this.customerApi + "/coupons/available");
-  }
+  token: string
+): Promise<AxiosResponse<CouponModel[]>> {
+  const headers = { Authorization: token };
+  return axios.get<CouponModel[]>(
+    `${this.customerApi}/coupons/available`, { headers }
+  );
+}
 
-//   public deleteCustomerCoupon(id: number): Promise<AxiosResponse<any>> {
-//     return axios.delete<any>(this.customerApi + "/" + id);
-//   }
+// ------------------------ Company actions ------------------------
+public getCompanyDetails(
+  id: number, token: string
+): Promise<AxiosResponse<CompanyModel>> {
+  const headers = { Authorization: token };
+  return axios.get<CompanyModel>(
+    `${this.companyApi}/${id}/details`, { headers }
+  );
+}
 
-//   public editCustomerCoupon(
-//     id: number,
-//     customer: CustomerPayloadModel
-//   ): Promise<AxiosResponse<CouponModel>> {
-//     return axios.put<CouponModel>(this.customerApi + "/" + id, customer);
-//   }
+public getAllCompanyCoupons(
+  id: number, token: string
+): Promise<AxiosResponse<CouponModel[]>> {
+  const headers = { Authorization: token };
+  return axios.get<CouponModel[]>(
+    `${this.companyApi}/${id}/coupons`, { headers }
+  );
+}
 
-  // ------------------------ Company actions ------------------------
-  public getCompanyDetails(
-    id: number
-  ): Promise<AxiosResponse<CompanyModel>> {
-    return axios.get<CompanyModel>(this.companyApi + "/" + id + "/details" );
-  }
+public getSingleCompanyCouponById(
+  id: number, token: string
+): Promise<AxiosResponse<CouponModel>> {
+  const headers = { Authorization: token };
+  return axios.get<CouponModel>(
+    `${this.companyApi}/${id}`, { headers }
+  );
+}
 
-  public getAllCompanyCoupons(
-    id: number
-  ): Promise<AxiosResponse<CouponModel[]>> {
-    return axios.get<CouponModel[]>(this.companyApi + "/" + id + "/coupons");
-  }
+public deleteCompanyCoupon(
+  companyId: number,
+  id: number,
+  token: string
+): Promise<AxiosResponse<any>> {
+  const headers = { Authorization: token };
+  return axios.delete<any>(
+    `${this.companyApi}/${companyId}/coupon/${id}`, { headers }
+  );
+}
 
-  public getSingleCompanyCouponById(
-    id: number
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.get<CouponModel>(this.companyApi + "/" + id );
-  }
+public addCompanyCoupon(
+  coupon: CouponPayloadModel,
+  companyId: number,
+  token: string
+): Promise<AxiosResponse<CouponModel>> {
+  const headers = { Authorization: token };
+  return axios.post<CouponModel>(
+    `${this.companyApi}/${companyId}/coupons`, coupon, { headers }
+  );
+}
 
-  public deleteCompanyCoupon(
-    companyId: number,
-    id: number
-  ): Promise<AxiosResponse<any>> {
-    return axios.delete<any>(
-      this.companyApi + "/" + companyId + "/coupon/" + id
-    );
-  }
+public editCompanyCoupon(
+  companyId: number,
+  id: number,
+  coupon: CouponPayloadModel,
+  token: string
+): Promise<AxiosResponse<CouponModel>> {
+  const headers = { Authorization: token };
+  return axios.put<CouponModel>(
+    `${this.companyApi}/${companyId}/coupon/${id}`, coupon, { headers }
+  );
+}
 
-  public addCompanyCoupon(
-    coupon: CouponPayloadModel,
-    companyId: number
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.post<CouponModel>(
-      this.companyApi + "/" + companyId + "/coupons",
-      coupon
-    );
-  }
-
-  public editCompanyCoupon(
-    companyId: number,
-    id: number,
-    coupon: CouponPayloadModel
-  ): Promise<AxiosResponse<CouponModel>> {
-    return axios.put<CouponModel>(
-      this.companyApi + "/" + companyId + "/coupon/" + id,
-      coupon
-    );
-  }
 }
 
 const webApi = new WebApi();

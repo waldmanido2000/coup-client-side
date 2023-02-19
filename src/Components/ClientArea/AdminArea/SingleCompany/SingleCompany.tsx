@@ -20,7 +20,7 @@ function SingleCompany(props:CompanyProps): JSX.Element {
 
     useEffect(() => {
         if (companies.length === 0) {
-            webApi.getAllCompanies()
+            webApi.getAllCompanies(store.getState().userReducer.user.token)
                 .then(res => {
                     console.log(res.data);
                     // Update local state

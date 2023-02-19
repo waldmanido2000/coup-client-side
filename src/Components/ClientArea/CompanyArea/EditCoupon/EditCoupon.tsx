@@ -48,7 +48,7 @@ function EditCoupon(): JSX.Element {
 
 
     const putCoupon = async (coupon: CouponPayloadModel) => {
-        await webApi.editCompanyCoupon(companyId, id, coupon)
+        await webApi.editCompanyCoupon(companyId, id, coupon, store.getState().userReducer.user.token)
             .then(res => {
                 store.dispatch(updatedCouponAction(res.data));
                 notify.success('Woho coupon updated successfully');

@@ -30,7 +30,7 @@ function EditCustomer(): JSX.Element {
 
 
     const putCustomer = async (customer: CustomerPayloadModel) => {
-        await webApi.editCustomer(id, customer)
+        await webApi.editCustomer(id, customer, store.getState().userReducer.user.token)
             .then(res => {
                 store.dispatch(updatedCustomerAction(res.data));
                 notify.success('Woho customer updated successfully');

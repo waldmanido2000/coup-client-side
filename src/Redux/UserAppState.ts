@@ -1,8 +1,8 @@
 import { ClientType } from '../Models/ClientType';
-import { User } from './../Models/Auth';
+import { User, UserPayload } from './../Models/Auth';
 export class UserAppState {
     // Step 1 - Define User global App State
-    public user: User = { clientType: ClientType.ADMINISTRATOR, token: "" };
+    public user: UserPayload = {clientType: ClientType.ADMINISTRATOR, token: "", id:0};
 }
 
 // Step 2 - Define all actions
@@ -18,10 +18,10 @@ export interface UserAction {
 }
 
 // Step 4- create creator function
-export function loggedIn(user: User): UserAction {
+export function loggedIn(user: UserPayload): UserAction {
     return {
         type: ActionType.LOGGED_IN,
-        payload: user
+        payload: { ...user }
     }
 }
 
@@ -44,7 +44,7 @@ export function userReducer(currentState: UserAppState = new UserAppState(), act
         }
         case ActionType.LOGGED_OUT: {
             console.log(newState.user);
-            newState.user = { clientType: ClientType.ADMINISTRATOR, token: "" };
+            newState.user = { clientType: ClientType.ADMINISTRATOR, token: "",id:0 };
             console.log(newState.user);
         }
     }

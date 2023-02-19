@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CompanyModel } from "../../../../Models/CompanyModel";
+import store from "../../../../Redux/Store";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import CouponList from "../CouponList/CouponList";
@@ -10,14 +12,16 @@ interface CompanyDetailsProps {
 }
 
 function CompanyDetails(props: CompanyDetailsProps): JSX.Element {
+    const navigate = useNavigate();
     const [company, setCompany] = useState<CompanyModel>();
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
+        const token = store.getState().userReducer.user.token;
+        const id = store.getState().userReducer.user.id;
+        if (!token) {
+            navigate("/login");
+        }
 
-        webApi.getCompanyDetails(props.companyId)
+        webApi.getCompanyDetails(id, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCompany(res.data);

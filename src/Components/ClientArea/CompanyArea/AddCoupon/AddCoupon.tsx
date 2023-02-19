@@ -5,6 +5,7 @@ import { CouponPayloadModel } from "../../../../Models/CouponModel";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { useNavigate, useParams } from "react-router-dom";
+import store from "../../../../Redux/Store";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -49,7 +50,7 @@ const AddCoupon = (): JSX.Element => {
     const postCoupon = async (coupon: CouponPayloadModel) => {
         // Call the addCoupon API and handle the response
         console.log(coupon);
-        await webApi.addCompanyCoupon(coupon, companyId)
+        await webApi.addCompanyCoupon(coupon, companyId, store.getState().userReducer.user.token)
             .then(() => {
                 // Show a success notification
                 notify.success('Coupon added successfully');

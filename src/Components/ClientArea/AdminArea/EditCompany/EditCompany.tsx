@@ -29,7 +29,7 @@ function EditCompany(): JSX.Element {
     });
 const userFromStore = store.getState().userReducer.user;
     const putCompany = async (company: CompanyPayloadModel) => {
-        await webApi.editCompany(id, company)
+        await webApi.editCompany(id, company, store.getState().userReducer.user.token)
             .then(res => {
                 store.dispatch(updatedCompanyAction(res.data));
                 navigate('/');

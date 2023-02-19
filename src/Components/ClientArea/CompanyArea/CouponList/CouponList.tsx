@@ -29,12 +29,12 @@ function CouponList(props: CouponListProps): JSX.Element {
     const [maxPrice, setMaxPrice] = useState<number>(0);
     const [category, setCategory] = useState<string>();
     useEffect(() => {
-        // const token = store.getState().userReducer.user.token;
-        // if (!token) {
-        //     navigate("/login");
-        // }
+        const token = store.getState().userReducer.user.token;
+        if (!token) {
+            navigate("/login");
+        }
 
-        webApi.getAllCompanyCoupons(companyId)
+        webApi.getAllCompanyCoupons(companyId, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCoupons(res.data);
