@@ -7,6 +7,7 @@ import webApi from "../../../../Services/WebApi";
 import { useNavigate, useParams } from "react-router-dom";
 import store from "../../../../Redux/Store";
 import { useEffect } from "react";
+import moment from "moment";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -35,11 +36,11 @@ const AddCoupon = (): JSX.Element => {
         startDate: yup
             .date()
             .required('startDate is required')
-            .min(new Date(), "startDate must be later than today's date"),
+            .min(moment().format('YYYY-MM-DD'), "startDate must be later than today's date"),
         endDate: yup
             .date()
             .required('endDate is required')
-            .min(yup.ref('startDate'), 'endDate must be later than startDate'),
+            .min(yup.ref('startDate'), 'end Date must be later than startDate'),
         amount: yup.number().required("Amount is required"),
         price: yup.number().required("Price is required"),
         image: yup.string().required("Image is required"),

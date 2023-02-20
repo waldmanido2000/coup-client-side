@@ -9,6 +9,7 @@ import webApi from "../../../../Services/WebApi";
 import "./EditCoupon.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import moment from "moment";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -39,13 +40,13 @@ function EditCoupon(): JSX.Element {
         category: yup.string().required("Category is required"),
         title: yup.string().required("Title is required"),
         description: yup.string().required("Description is required"),
-        startDate: yup
-            .date()
-            .required('startDate is required'),
         endDate: yup
             .date()
-            .required('endDate is required')
-            .min(yup.ref('startDate'), 'endDate must be later than startDate'),
+            .required('End Date is required')
+            .test('is-greater-than-start', 'End Date must be later than Start Date', function (value) {
+                const { startDate } = this.parent;
+                return moment(value).isSameOrAfter(startDate);
+            }),
         amount: yup.number().required("Amount is required"),
         price: yup.number().required("Price is required"),
         image: yup.string().required("Image is required"),
@@ -78,46 +79,54 @@ function EditCoupon(): JSX.Element {
             <form className="myForm" onSubmit={handleSubmit(putCoupon)}>
                 <label htmlFor="id">Id</label>
                 <input disabled={true} id="id" name="id" type="number" placeholder="Id..." value={id} />
+
                 <label htmlFor="category">Category</label>
                 <select {...register("category")} id="category" name="category">
-                    {options.map(option => (
+                    {options.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
                     ))}
                 </select>
+
                 <label htmlFor="title">Title</label>
                 <input {...register("title")} id="title" name="title" type="text" placeholder="Title..." />
-                {(errors.title) ? <span>{errors.title?.message}</span> : null}
+                {errors.title && <span>{errors.title?.message}</span>}
 
                 <label htmlFor="description">Description</label>
                 <input {...register("description")} id="description" name="description" type="text" placeholder="Description..." />
-                {(errors.description) ? <span>{errors.description?.message}</span> : null}
+                {errors.description && <span>{errors.description?.message}</span>}
 
                 <label htmlFor="startDate">Start Date</label>
-                <input {...register("startDate")} id="startDate" name="startDate" type="date" placeholder="Start Date..." />
-                {(errors.startDate) ? <span>{errors.startDate?.message}</span> : null}
+                <input
+                    {...register("startDate")}
+                    id="startDate"
+                    name="startDate"
+                    type="date"
+                    placeholder="Start Date..."
+                    disabled
+                />
+                {errors.startDate && <span>{errors.startDate?.message}</span>}
 
                 <label htmlFor="endDate">End Date</label>
                 <input {...register("endDate")} id="endDate" name="endDate" type="date" placeholder="End Date..." />
-                {(errors.endDate) ? <span>{errors.endDate?.message}</span> : null}
+                {errors.endDate && <span>{errors.endDate?.message}</span>}
 
                 <label htmlFor="amount">Amount</label>
                 <input {...register("amount")} id="amount" name="amount" type="number" placeholder="Amount..." />
-                {(errors.amount) ? <span>{errors.amount?.message}</span> : null}
+                {errors.amount && <span>{errors.amount?.message}</span>}
 
                 <label htmlFor="price">Price</label>
                 <input {...register("price")} id="price" name="price" type="number" placeholder="Price..." />
-                {(errors.price) ? <span>{errors.price?.message}</span> : null}
+                {errors.price && <span>{errors.price?.message}</span>}
 
                 <label htmlFor="image">Image URL</label>
                 <input {...register("image")} id="image" name="image" type="text" placeholder="Image URL..." />
+                {errors.image && <span>{errors.image?.message}</span>}
 
-                {(errors.image) ? <span>{errors.image?.message}</span> : null}
-
-                <button type="submit" disabled={!isValid || !isDirty}>Update Coupon</button>
-
-
+                <button type="submit" disabled={!isValid || !isDirty}>
+                    Update Coupon
+                </button>
             </form>
         </div>
     );

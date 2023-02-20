@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { User } from "../../../Models/Auth";
 import store from "../../../Redux/Store";
+import { loggedOut } from "../../../Redux/UserAppState";
 import "./AuthMenu.css";
 
 function AuthMenu(): JSX.Element {

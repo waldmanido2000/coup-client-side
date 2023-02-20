@@ -54,13 +54,13 @@ function Login(): JSX.Element {
                 <input {...register("email")} type="email" placeholder="email" />
                 {(!errors.password) ? <label htmlFor="password">Password</label> : <span>{errors.password.message}</span>}
                 <input {...register("password")} type="password" placeholder="password" />
+                {(!errors.clientType) ? <label htmlFor="password">Client Type</label> : <span>{errors.clientType.message}</span>}
                 <select {...register("clientType")} defaultValue={""}>
                     <option value="" disabled>Select client type</option>
                     {Object.values(ClientType).map((value) => (
                         <option key={value} value={value}>{value}</option>
                     ))}
                 </select>
-                {errors.clientType && <span>{errors.clientType.message}</span>}
                 <button disabled={!isValid}>Login</button>
             </form>
         </div>

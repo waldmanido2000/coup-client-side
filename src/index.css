@@ -129,22 +129,27 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 600px;
-  background-color: yellow;
+  width: 500px;
+  background-color: var(--darker-color);
   margin: auto;
+  border:2px solid var(--darker-color);
+  border-radius: 10%;
+  padding: var(--layout-padding)
 }
 
 .myForm input, .myForm button, .myForm select {
-  width: 50%;
+  width: 350px;
   padding: var(--layout-padding) 0 var(--layout-padding) 0;
   border: none;
   margin-bottom: var(--layout-padding);
 }
 .myForm input, .myForm select {
-background-color: var(--darker-color);
-color: var(--lighter-color);
+background-color: var(--lighter-color);
+color: var(--darker-color);
 }
-
+.myForm label {
+  color: var(--light-color)
+}
 .myForm button {
   margin: 5px;
   border-radius: 10px;
@@ -156,6 +161,7 @@ color: var(--lighter-color);
 
 .myForm button:hover {
   background-color: var(--darker-color);
+  border: 2px solid var(--lighter-color);
 }
 
 .myForm button:disabled, .myForm input:disabled {

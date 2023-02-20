@@ -4,6 +4,8 @@ import notFoundImage from "../../../Assets/not-found.jpg";
 import "./CouponCard.css";
 import { FaCar, FaEdit, FaHamburger, FaLightbulb, FaPlane, FaShekelSign, FaShoppingBag, FaTrash, FaUtensils } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { UserPayload } from "../../../Models/Auth";
+import store from "../../../Redux/Store";
 
 interface CouponProps {
 	coupon: CouponModel;
@@ -12,6 +14,7 @@ interface CouponProps {
 
 function CouponCard(props: CouponProps): JSX.Element {
 	const [imageUrl, setImageUrl] = useState(props.coupon.image);
+	const [user, setUser] = useState<UserPayload>(store.getState().userReducer.user);
 	const [imageError, setImageError] = useState(false);
 	const navigate = useNavigate();
 
@@ -66,10 +69,14 @@ function CouponCard(props: CouponProps): JSX.Element {
 		<div className={`CouponCard ${categoryClass(props.coupon.category)}`}>
 			<div className="row couponCardButtons">
 				<h4>{props.coupon.title}</h4>
-				<div className="row">
+				{
+					user.id!=0 ?
+					<div className="row">
 					<button className="cardButton" onClick={() => deleteCoupon(props.coupon.id)}><FaTrash /></button>
 					<button className="cardButton" onClick={() => editCoupon(props.coupon.id)}><FaEdit /></button>
 				</div>
+				:""
+				}
 				<div className="category">
 					<label>{categoryClass(props.coupon.category)}</label>
 					{getCategoryIcon(props.coupon.category)}
