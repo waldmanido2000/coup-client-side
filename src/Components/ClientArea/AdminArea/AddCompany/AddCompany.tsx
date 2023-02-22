@@ -10,6 +10,7 @@ import webApi from "../../../../Services/WebApi";
 import { addedCompanyAction } from "../../../../Redux/CompanyAppState";
 import { useEffect, useState } from "react";
 import { User } from "../../../../Models/Auth";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 function AddCompany(): JSX.Element {
     const navigate = useNavigate();
@@ -41,20 +42,23 @@ function AddCompany(): JSX.Element {
 
     // Async function to add a company and dispatch an action
     const postCompany = async (company: CompanyPayloadModel) => {
-        // Call the addCompany API and handle the response
-        await webApi.addCompany(company, user.token)
+        await webApi
+            .addCompany(company, user.token)
             .then(res => {
-                // Show a success notification and dispatch an action
-                notify.success('Woho company added successfully');
+                notify.success("Woho company added successfully");
                 store.dispatch(addedCompanyAction(res.data));
-                navigate('/companies');
+                navigate("/companies");
             })
             .catch(err => {
-                // Show an error notification
-                notify.error(err);
-            })
+                if (err.response && err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
+            });
         console.log(company);
-    }
+    };
 
     return (
         <div className="AddCompany">

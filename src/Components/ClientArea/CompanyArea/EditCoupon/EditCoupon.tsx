@@ -10,6 +10,7 @@ import "./EditCoupon.css";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -61,10 +62,16 @@ function EditCoupon(): JSX.Element {
                 navigate('/');
             })
             .catch(err => {
-                notify.error(err);
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
             })
         console.log(coupon);
     }
+    
 
     let defaultValuesObj = { ...obj };
 

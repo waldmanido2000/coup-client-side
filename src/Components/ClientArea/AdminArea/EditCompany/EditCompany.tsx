@@ -9,6 +9,7 @@ import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import "./EditCompany.css";
 import { updatedCompanyAction } from "../../../../Redux/CompanyAppState";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 function EditCompany(): JSX.Element {
     const params = useParams();
@@ -32,16 +33,21 @@ function EditCompany(): JSX.Element {
                 .required("password is missing"),
     });
 const userFromStore = store.getState().userReducer.user;
-    const putCompany = async (company: CompanyPayloadModel) => {
-        await webApi.editCompany(id, company, store.getState().userReducer.user.token)
-            .then(res => {
-                store.dispatch(updatedCompanyAction(res.data));
-                navigate('/');
-            })
-            .catch(err => {
-                notify.error(err);
-            })
-        console.log(company);
+const putCompany = async (company: CompanyPayloadModel) => {
+    await webApi.editCompany(id, company, store.getState().userReducer.user.token)
+    .then(res => {
+    store.dispatch(updatedCompanyAction(res.data));
+    navigate('/');
+    })
+    .catch(err => {
+    if (err.response && err.response.status === 401) {
+    store.dispatch(loggedOut());
+    navigate("/login");
+    } else {
+    notify.error(err);
+    }
+    })
+    console.log(company);
     }
 
     let defaultValuesObj = { ...obj };

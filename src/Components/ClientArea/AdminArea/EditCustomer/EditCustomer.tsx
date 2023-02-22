@@ -9,6 +9,7 @@ import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import "./EditCustomer.css";
 import { updatedCustomerAction } from "../../../../Redux/CustomerAppState";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 function EditCustomer(): JSX.Element {
     const params = useParams();
@@ -41,10 +42,16 @@ function EditCustomer(): JSX.Element {
                 navigate('/');
             })
             .catch(err => {
-                notify.error(err);
-            })
+                if (err.response && err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
+            });
         console.log(customer);
     }
+    
 
     let defaultValuesObj = { ...obj };
 

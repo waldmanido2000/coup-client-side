@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deletedCouponAction } from "../../../../Redux/CouponAppState";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import "./DeleteCoupon.css";
@@ -29,9 +30,15 @@ function DeleteCoupon(): JSX.Element {
                 navigate("/");
             })
             .catch(err => {
-                notify.error(err);
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
             });
     }
+    
     return (
         <div className="DeleteCoupon">
             <h3>Attention</h3>

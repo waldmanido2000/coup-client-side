@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
+import { User } from "../../../../Models/Auth";
 import { CouponModel, CouponPayloadModel } from "../../../../Models/CouponModel";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import PurchaseCard from "../../../Cards/PurchaseCard/PurchaseCard";
@@ -23,36 +25,51 @@ function CouponPurchase(): JSX.Element {
     const params = useParams();
     const customerId = +(params.customerId || 0);
     const [availableCoupons, setAvailableCoupons] = useState<CouponModel[]>([]);
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
+
     useEffect(() => {
         const token = store.getState().userReducer.user.token;
         if (!token) {
             navigate("/login");
         }
-
+    
         webApi.getAllAvailableCoupons(store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setAvailableCoupons(res.data);
-
-                // notify.success('Woho I got my element from server side!!!');
+    
             })
-            .catch(err => notify.error(err));
-    }, []);
+            .catch(err => {
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
+            });
+    }, [user.token]);
+    
     const [maxPrice, setMaxPrice] = useState<number>(0);
     const [category, setCategory] = useState<string>();
     const [ownedCoupons, setOwnedCoupons] = useState<CouponModel[]>(store.getState().purchasesReducer.purchases);
+
     const delta = availableCoupons.filter(coupon => {
         return !ownedCoupons.some(ownedCoupon => ownedCoupon.id === coupon.id);
     });
     function purchase(coupon: CouponModel): void {
       
         webApi.purchaseCoupon(customerId, coupon, store.getState().userReducer.user.token)
-          .then(res => {
-            notify.success("Coupon purchased successfully");
-          })
-          .catch(err => {
+        .then(res => {
+          notify.success("Coupon purchased successfully");
+        })
+        .catch(err => {
+          if (err.response.status === 401) {
+            navigate("/login");
+          } else {
             notify.error(err);
-          });
+          }
+        });
+
       }
       
 

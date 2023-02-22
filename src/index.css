@@ -241,9 +241,9 @@ body {
 .float {
   position: fixed;
   top: 10%;
-  min-width: 40vh;
-  min-height: 40vh;
-  max-height: 80vh;
+  min-width: 300px;
+  min-height: 400px;
+  max-height: 800px;
   box-shadow: 15px 10px 15px -2px var(--darker-color) !important;
   z-index: 100;
   opacity: 1 !important;

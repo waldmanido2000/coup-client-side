@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaRegPlusSquare, FaFilter } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../../../Models/Auth";
 import { CouponModel } from "../../../../Models/CouponModel";
 import { gotAllPurchasesAction } from "../../../../Redux/PurchaseAppState";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import PurchaseCard from "../../../Cards/PurchaseCard/PurchaseCard";
@@ -25,6 +27,7 @@ interface PurchaseListProps {
 function PurchaseList(props:PurchaseListProps): JSX.Element {
     const navigate = useNavigate();
     const customerId = props.customerId;
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
     const [coupons, setCoupons] = useState<CouponModel[]>([]);
     const [maxPrice, setMaxPrice] = useState<number>(0);
     const [category, setCategory] = useState<string>();
@@ -33,23 +36,30 @@ function PurchaseList(props:PurchaseListProps): JSX.Element {
         if (!token) {
             navigate("/login");
         }
-
+    
         webApi.getAllCustomerCoupons(customerId, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCoupons(res.data);
-
+    
                 // Update app state
                 store.dispatch(gotAllPurchasesAction(res.data));
-
+    
                 // notify.success('Woho I got my element from server side!!!');
             })
-            .catch(err => notify.error(err));
-
+            .catch(err => {
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                }
+                notify.error(err);
+            });
+    
         return store.subscribe(() => {
             setCoupons(store.getState().purchasesReducer.purchases);
         });
-    }, []);
+    }, [user.token]);
+    
     return (
         <>
             <div className="PurchaseListButtons row">

@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { deletedCompanyAction } from "../../../../Redux/CompanyAppState";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 
@@ -27,9 +28,15 @@ function DeleteCompany(): JSX.Element {
                 navigate("/");
             })
             .catch(err => {
-                notify.error(err);
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
             });
     }
+    
     return (
         <div className="DeleteCompany col">
             <h3>Attention</h3>

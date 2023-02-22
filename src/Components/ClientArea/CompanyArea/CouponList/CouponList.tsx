@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaFilter, FaRegPlusSquare } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../../../Models/Auth";
 import { CouponModel } from "../../../../Models/CouponModel";
 import { gotAllCouponsAction } from "../../../../Redux/CouponAppState";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import CouponCard from "../../../Cards/CouponCard/CouponCard";
@@ -28,28 +30,37 @@ function CouponList(props: CouponListProps): JSX.Element {
     const [coupons, setCoupons] = useState<CouponModel[]>([]);
     const [maxPrice, setMaxPrice] = useState<number>(0);
     const [category, setCategory] = useState<string>();
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
+
     useEffect(() => {
         const token = store.getState().userReducer.user.token;
         if (!token) {
             navigate("/login");
         }
-
+    
         webApi.getAllCompanyCoupons(companyId, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCoupons(res.data);
-
+    
                 // Update app state
                 store.dispatch(gotAllCouponsAction(res.data));
-
+    
                 // notify.success('Woho I got my element from server side!!!');
             })
-            .catch(err => notify.error(err));
-
+            .catch(err => {
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                }
+                notify.error(err);
+            });
+    
         return store.subscribe(() => {
             setCoupons(store.getState().couponsReducer.coupons);
         });
-    }, []);
+    }, [user.token]);
+    
     return (
         <>
             <div className="CouponListButtons row">

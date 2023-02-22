@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { deletedCustomerAction } from "../../../../Redux/CustomerAppState";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import "./DeleteCustomer.css";
@@ -23,15 +24,20 @@ function DeleteCustomer(): JSX.Element {
 
     const proceed = async () => {
         await webApi.deleteCustomer(id, store.getState().userReducer.user.token)
-            .then(res => {
-                notify.success('Woho deleted successfully');
-                store.dispatch(deletedCustomerAction(id));
-                navigate("/");
-            })
-            .catch(err => {
-                notify.error(err);
-            });
-    }
+        .then(res => {
+        notify.success('Woho deleted successfully');
+        store.dispatch(deletedCustomerAction(id));
+        navigate("/");
+        })
+        .catch(err => {
+        if (err.response && err.response.status === 401) {
+        store.dispatch(loggedOut());
+        navigate("/login");
+        } else {
+        notify.error(err);
+        }
+        });
+        }
     return (
         <div className="DeleteCustomer col">
             <h3>Attention</h3>

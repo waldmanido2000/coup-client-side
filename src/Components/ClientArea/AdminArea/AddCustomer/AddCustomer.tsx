@@ -9,6 +9,7 @@ import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import { addedCustomerAction } from "../../../../Redux/CustomerAppState";
 import { useEffect } from "react";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 function AddCustomer(): JSX.Element {
     const navigate = useNavigate();
@@ -44,37 +45,41 @@ function AddCustomer(): JSX.Element {
                 navigate('/customers');
             })
             .catch(err => {
-                // Show an error notification
-                notify.error(err);
+                if (err.response && err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    // Show an error notification
+                    notify.error(err);
+                }
             });
         console.log(customer);
     }
 
     return (
         <div className="AddCustomer">
-          <h1>Add Customer</h1>
-          <form className="myForm" onSubmit={handleSubmit(postCustomer)}>
-            {errors.firstName && <span>{errors.firstName.message}</span>}
-            <label htmlFor="firstName">First Name</label>
-            <input {...register("firstName")} id="firstName" name="firstName" type="text" placeholder="First Name..." />
-      
-            {errors.lastName && <span>{errors.lastName.message}</span>}
-            <label htmlFor="lastName">Last Name</label>
-            <input {...register("lastName")} id="lastName" name="lastName" type="text" placeholder="Last Name..." />
-      
-            {errors.email && <span>{errors.email.message}</span>}
-            <label htmlFor="email">Email</label>
-            <input {...register("email")} id="email" name="email" type="email" placeholder="Email..." />
-      
-            {errors.password && <span>{errors.password.message}</span>}
-            <label htmlFor="password">Password</label>
-            <input {...register("password")} id="password" name="password" type="password" placeholder="Password..." />
-      
-            <button disabled={!isValid}>Add Customer</button>
-          </form>
+            <h1>Add Customer</h1>
+            <form className="myForm" onSubmit={handleSubmit(postCustomer)}>
+                {errors.firstName && <span>{errors.firstName.message}</span>}
+                <label htmlFor="firstName">First Name</label>
+                <input {...register("firstName")} id="firstName" name="firstName" type="text" placeholder="First Name..." />
+
+                {errors.lastName && <span>{errors.lastName.message}</span>}
+                <label htmlFor="lastName">Last Name</label>
+                <input {...register("lastName")} id="lastName" name="lastName" type="text" placeholder="Last Name..." />
+
+                {errors.email && <span>{errors.email.message}</span>}
+                <label htmlFor="email">Email</label>
+                <input {...register("email")} id="email" name="email" type="email" placeholder="Email..." />
+
+                {errors.password && <span>{errors.password.message}</span>}
+                <label htmlFor="password">Password</label>
+                <input {...register("password")} id="password" name="password" type="password" placeholder="Password..." />
+
+                <button disabled={!isValid}>Add Customer</button>
+            </form>
         </div>
-      );
-    }
-    
-    export default AddCustomer;
-    
+    );
+}
+
+export default AddCustomer;

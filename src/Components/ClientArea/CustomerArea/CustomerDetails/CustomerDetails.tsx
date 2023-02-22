@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { User } from "../../../../Models/Auth";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 import store from "../../../../Redux/Store";
+import { loggedOut } from "../../../../Redux/UserAppState";
 import notify from "../../../../Services/NotificationService";
 import webApi from "../../../../Services/WebApi";
 import PurchaseList from "../PurchaseList/PurchaseList";
@@ -12,23 +14,31 @@ interface CustomerDetailsProps {
 function CustomerDetails(props: CustomerDetailsProps): JSX.Element {
     const navigate = useNavigate();
     const [customer, setCustomer] = useState<CustomerModel>();
+    const [user, setUser] = useState<User>(store.getState().userReducer.user);
+
     useEffect(() => {
         const token = store.getState().userReducer.user.token;
         const id = store.getState().userReducer.user.id;
         if (!token) {
             navigate("/login");
         }
-
+    
         webApi.getCustomerDetails(id, store.getState().userReducer.user.token)
             .then(res => {
                 // Update local state
                 setCustomer(res.data);
                 console.log(res.data);
-
-                // notify.success('Woho I got my element from server side!!!');
             })
-            .catch(err => notify.error(err));
-    }, []);
+            .catch(err => {
+                if (err.response && err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    notify.error(err);
+                }
+            });
+    }, [user.token]);
+    
     return (
         <div className="CustomerDetails">
             <h3>Hello {customer?.firstName} {customer?.lastName}!</h3>

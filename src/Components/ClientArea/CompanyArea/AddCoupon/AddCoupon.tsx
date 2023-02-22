@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import store from "../../../../Redux/Store";
 import { useEffect } from "react";
 import moment from "moment";
+import { loggedOut } from "../../../../Redux/UserAppState";
 
 const options = [
     { value: "FOOD", label: "FOOD" },
@@ -64,10 +65,16 @@ const AddCoupon = (): JSX.Element => {
                 navigate("/");
             })
             .catch(err => {
-                // Show an error notification
-                notify.error(err);
+                if (err.response.status === 401) {
+                    store.dispatch(loggedOut());
+                    navigate("/login");
+                } else {
+                    // Show an error notification
+                    notify.error(err);
+                }
             });
     };
+
 
     return (
         <div className="AddCoupon">
