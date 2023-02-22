@@ -15,6 +15,7 @@ import DeleteCoupon from "../../ClientArea/CompanyArea/DeleteCoupon/DeleteCoupon
 import EditCoupon from "../../ClientArea/CompanyArea/EditCoupon/EditCoupon";
 import AddPurchase from "../../ClientArea/CustomerArea/AddPurchase/AddPurchase";
 import About from "../../PagesArea/MainArea/About/About";
+import Developer from "../../PagesArea/MainArea/Developer/Developer";
 import Home from "../../PagesArea/MainArea/Home/Home";
 import Page404 from "../../PagesArea/MainArea/Page404/Page404";
 import "./Routing.css";
@@ -30,6 +31,7 @@ function Routing(): JSX.Element {
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route path="/developer" element={<Developer />} />
 
                 {/* admin Routes */}
                 <Route path="/companies" element={<CompanyList />} />

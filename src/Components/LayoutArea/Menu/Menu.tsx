@@ -6,7 +6,8 @@ function Menu(): JSX.Element {
     return (
         <div className="Menu">
             <Link to={'/'} >Home</Link>
-            <Link to={'About'} >About</Link>
+            <Link to={'about'} >About</Link>
+            <Link to={'developer'} >developer</Link>
             <AuthMenu/>
         </div>
     );
