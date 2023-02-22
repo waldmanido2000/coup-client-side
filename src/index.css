@@ -1,3 +1,4 @@
+/* global settings */
 @import url("https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk&display=swap");
 
 html,
@@ -9,17 +10,12 @@ body,
   font-family: "Righteous", cursive, "Space Grotesk", sans-serif;
 }
 
-/* root vars */
-
 :root {
   --lighter-color: #e0fcff;
   --light-color: #bde4f4;
   --dark-color: #ff7f50;
   --darker-color: #404969;
   --layout-padding: 0.5em;
-  --control-admin-bg: yellow;
-  --control-company-bg: green;
-  --control-customer-bg: purple;
   --card-color: #40496990;
 }
 
@@ -27,6 +23,22 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 /* layout areas */
@@ -106,25 +118,6 @@ body {
 .Footer svg {
   margin: 0.2em;
 }
-
-/* global display classes */
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.col {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
 /* form display classes */
 
 .myForm {
@@ -176,12 +169,11 @@ body {
   background-color: var(--lighter-color);
   color: var(--dark-color);
 }
-/* form error comments */
+
 .myForm span {
   color: var(--dark-color);
   font-weight: 700;
 }
-
 /* cards */
 
 .CompanyCard,
@@ -373,7 +365,6 @@ h3 {
 .CouponCard,
 .PurchaseCard {
   background-size: cover;
-  /* border: 1px solid var(--darker-color); */
   margin-bottom: 0.8em;
 }
 
@@ -399,12 +390,6 @@ h3 {
 .PurchaseList .PurchaseCard {
   margin: var(--layout-padding);
 }
-.AdminScreen {
-}
-.CompanyDetails {
-}
-.CustomerDetails {
-}
 .CouponListButtons label,
 .PurchaseListButtons label {
   margin: var(--layout-padding);
@@ -420,6 +405,7 @@ h3 {
   border: 1px solid;
   padding-bottom: var(--layout-padding);
 }
+
 .About {
   max-width: 800px;
   display: flex;

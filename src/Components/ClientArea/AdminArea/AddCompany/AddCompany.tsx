@@ -69,7 +69,7 @@ function AddCompany(): JSX.Element {
                 <input {...register("email")} id="email" name="email" type="text" placeholder="Email..." />
                 {/* Display error message if there's an error with the password input */}
                 {(errors.password) ? <span>{errors.password?.message}</span> : <label htmlFor="password">Password</label>}
-                <input {...register("password")} id="password" name="password" type="text" placeholder="Password..." />
+                <input {...register("password")} id="password" name="password" type="password" placeholder="Password..." />
                 {/* Add Company button, disabled if the form is invalid */}
                 <button disabled={!isValid}>Add Company</button>
 

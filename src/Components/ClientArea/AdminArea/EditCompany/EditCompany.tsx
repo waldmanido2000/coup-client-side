@@ -66,7 +66,7 @@ const userFromStore = store.getState().userReducer.user;
                 {(errors.email) ? <span>{errors.email?.message}</span> : <label htmlFor="email">Email</label>}
                 <input {...register("email")} id="email" name="email" type="text" placeholder="Email..." />
                 {(errors.password) ? <span>{errors.password?.message}</span> : <label htmlFor="password">Password</label>}
-                <input {...register("password")} id="password" name="password" type="text" placeholder="Password..." />
+                <input {...register("password")} id="password" name="password" type="password" placeholder="Password..." />
 
                 <button type="submit" disabled={!isValid || !isDirty}>Update Company</button>
 
